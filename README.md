@@ -4,7 +4,7 @@
 A simple mod to see your enemy's health.
 
 
-![Logo](https://github.com/DevPieter/Dont-Take-Damage/raw/main/src/main/resources/assets/donttakedamage/icon.png)
+![Logo](https://github.com/DevPieter/Health-Tags/blob/master/src/main/resources/assets/healthtags/icon.png)
 
 
 ## Features
