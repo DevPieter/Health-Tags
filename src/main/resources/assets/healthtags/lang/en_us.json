@@ -1,0 +1,5 @@
+{
+  "text.healthtags.renderer.none": "None",
+  "text.healthtags.renderer.heart": "Hearts",
+  "text.healthtags.renderer.percentage": "Percentage"
+}

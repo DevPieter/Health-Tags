@@ -21,7 +21,6 @@ public enum HealthTagRenderer {
     }
 
     public Text getName() {
-        //TODO: Add translations
         return Text.translatable("text.healthtags.renderer." + this.translationKey);
     }
 
