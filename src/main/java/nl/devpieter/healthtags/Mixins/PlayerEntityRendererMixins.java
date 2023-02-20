@@ -29,10 +29,12 @@ public abstract class PlayerEntityRendererMixins extends LivingEntityRenderer<Ab
     @Inject(at = @At("TAIL"), method = "render(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V")
     public void render(AbstractClientPlayerEntity player, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider consumerProvider, int light, CallbackInfo ci) {
         if (player.isInvisibleTo(this.client.player)) return;
-        if (!this.targetManager.isTarget(player)) return;
 
         IHealthTagRenderer renderer = HealthTags.selectedRenderer.getRenderer();
         if (renderer == null) return;
+
+        boolean showOnSelf = HealthTags.showOnSelf && player == this.client.player;
+        if (!(this.targetManager.isTarget(player) || showOnSelf)) return;
 
         matrices.push();
         matrices.translate(0.0, player.getHeight() + 0.5F, 0.0);
