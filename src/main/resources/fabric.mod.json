@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "healthtags",
+  "version": "${version}",
+  "name": "Health Tags v2",
+  "description": "A simple mod to see your enemy's health.",
+  "authors": [
+    "DevPieter"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/health-tags/",
+    "sources": "https://github.com/DevPieter/Health-Tags/"
+  },
+  "license": "MIT",
+  "icon": "assets/healthtags/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "nl.devpieter.healthtags.HealthTags"
+    ]
+  },
+  "mixins": [
+    "healthtags.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.11",
+    "fabric-api": "*",
+    "minecraft": "~1.19.3",
+    "java": ">=17"
+  }
+}
