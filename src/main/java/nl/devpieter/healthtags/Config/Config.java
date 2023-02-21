@@ -20,6 +20,8 @@ public class Config {
 
     /* === Global settings === */
     @Expose
+    public Setting<Boolean> Enabled = new Setting<>(true);
+    @Expose
     public Setting<Integer> ExtraHeight = new ClampSetting<>(2, -20, 60);
     @Expose
     public Setting<Boolean> ShowOnSelf = new Setting<>(true);

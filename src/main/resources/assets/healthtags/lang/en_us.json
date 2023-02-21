@@ -1,4 +1,8 @@
 {
+  "category.healthtags.healthtags": "Health Tags",
+
+  "key.healthtags.toggle": "Toggle on/off",
+
   "text.healthtags.renderer.none": "None",
   "text.healthtags.renderer.heart": "Hearts",
   "text.healthtags.renderer.percentage": "Percentage"

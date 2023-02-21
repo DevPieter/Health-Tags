@@ -1,4 +1,8 @@
 {
+  "category.healthtags.healthtags": "Health Tags",
+
+  "key.healthtags.toggle": "Schakel aan/uit",
+
   "text.healthtags.renderer.none": "Geen",
   "text.healthtags.renderer.heart": "Hartjes",
   "text.healthtags.renderer.percentage": "Percentage"
