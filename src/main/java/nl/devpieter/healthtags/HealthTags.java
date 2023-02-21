@@ -3,6 +3,7 @@ package nl.devpieter.healthtags;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import nl.devpieter.healthtags.Config.Config;
+import nl.devpieter.healthtags.Screens.ConfigScreen;
 
 public class HealthTags implements ModInitializer {
 
@@ -14,7 +15,8 @@ public class HealthTags implements ModInitializer {
         Keybindings.load();
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            if (Keybindings.TOGGLE.wasPressed()) this.config.Enabled.value(!this.config.Enabled.value());
+            if (Keybindings.TOGGLE.wasPressed()) this.config.Enabled.set(!this.config.Enabled.get());
+            if (Keybindings.OPEN_CONFIG_SCREEN.wasPressed()) client.setScreen(new ConfigScreen());
         });
     }
 }

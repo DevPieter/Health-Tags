@@ -30,7 +30,7 @@ public class Config {
 
     /* === Settings for HeartTagRenderer === */
     @Expose
-    public Setting<Integer> RowsOfHearts = new ClampSetting<>(10, 5, 25);
+    public Setting<Integer> HeartsInRow = new ClampSetting<>(10, 5, 25);
     @Expose
     public Setting<Integer> HeartsSpacedBy_X = new ClampSetting<>(8, 6, 16);
     @Expose

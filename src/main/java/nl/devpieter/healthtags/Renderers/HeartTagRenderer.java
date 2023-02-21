@@ -17,13 +17,13 @@ public class HeartTagRenderer implements IHealthTagRenderer {
     public void renderHealthTag(MatrixStack matrices, PlayerEntity player, boolean hasLabel, float tickDelta, int light) {
         // Get the config values
         Config config = Config.getInstance();
-        int extraHeight = config.ExtraHeight.value();
-        int rowsOfHearts = config.RowsOfHearts.value();
-        int heartsSpacedBy_X = config.HeartsSpacedBy_X.value();
-        int heartsSpacedBy_Y = config.HeartsSpacedBy_Y.value();
+        int extraHeight = config.ExtraHeight.get();
+        int heartsInRow = config.HeartsInRow.get();
+        int heartsSpacedBy_X = config.HeartsSpacedBy_X.get();
+        int heartsSpacedBy_Y = config.HeartsSpacedBy_Y.get();
 
         // Get the x position
-        float maxHealth = MathHelper.clamp(player.getMaxHealth(), 0, rowsOfHearts * 2);
+        float maxHealth = MathHelper.clamp(player.getMaxHealth(), 0, heartsInRow * 2);
         int x = -(MathHelper.ceil(maxHealth / 2.0) * heartsSpacedBy_X) / 2;
 
         // Get the y position
@@ -44,7 +44,7 @@ public class HeartTagRenderer implements IHealthTagRenderer {
         RenderSystem.enablePolygonOffset();
 
         // Calculate the extra height for the absorption hearts
-        int rows = MathHelper.ceil(containers / (float) rowsOfHearts);
+        int rows = MathHelper.ceil(containers / (float) heartsInRow);
         int absorptionHeight = -(rows * heartsSpacedBy_Y);
 
         // Draw the containers
@@ -65,9 +65,9 @@ public class HeartTagRenderer implements IHealthTagRenderer {
     private void drawContainers(MatrixStack matrices, int x, int y, int amount) {
         // Get the config values
         Config config = Config.getInstance();
-        int rowsOfHearts = config.RowsOfHearts.value();
-        int heartsSpacedBy_X = config.HeartsSpacedBy_X.value();
-        int heartsSpacedBy_Y = config.HeartsSpacedBy_Y.value();
+        int heartsInRow = config.HeartsInRow.get();
+        int heartsSpacedBy_X = config.HeartsSpacedBy_X.get();
+        int heartsSpacedBy_Y = config.HeartsSpacedBy_Y.get();
 
         // Set the width and height
         int width = 0, height = 0;
@@ -77,7 +77,7 @@ public class HeartTagRenderer implements IHealthTagRenderer {
             DrawableHelper.drawTexture(matrices, x + width, y + height, 16, 0, 9, 9, 256, 256);
             width += heartsSpacedBy_X;
 
-            if (width < (heartsSpacedBy_X * rowsOfHearts)) continue;
+            if (width < (heartsSpacedBy_X * heartsInRow)) continue;
             width = 0;
             height -= heartsSpacedBy_Y;
         }
@@ -86,9 +86,9 @@ public class HeartTagRenderer implements IHealthTagRenderer {
     private void drawHearts(MatrixStack matrices, int x, int y, HeartType type, int amount, boolean isLastHalf) {
         // Get the config values
         Config config = Config.getInstance();
-        int rowsOfHearts = config.RowsOfHearts.value();
-        int heartsSpacedBy_X = config.HeartsSpacedBy_X.value();
-        int heartsSpacedBy_Y = config.HeartsSpacedBy_Y.value();
+        int heartsInRow = config.HeartsInRow.get();
+        int heartsSpacedBy_X = config.HeartsSpacedBy_X.get();
+        int heartsSpacedBy_Y = config.HeartsSpacedBy_Y.get();
 
         // Set the width and height
         int width = 0, height = 0;
@@ -99,7 +99,7 @@ public class HeartTagRenderer implements IHealthTagRenderer {
             DrawableHelper.drawTexture(matrices, x + 1 + width, y + 1 + height, type.getU(isHalf), 1, 7, 7, 256, 256);
             width += heartsSpacedBy_X;
 
-            if (width < (heartsSpacedBy_X * rowsOfHearts)) continue;
+            if (width < (heartsSpacedBy_X * heartsInRow)) continue;
             width = 0;
             height -= heartsSpacedBy_Y;
         }
