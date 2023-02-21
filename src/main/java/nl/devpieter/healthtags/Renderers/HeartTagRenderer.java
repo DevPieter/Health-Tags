@@ -12,15 +12,15 @@ import nl.devpieter.healthtags.Enums.HeartType;
 public class HeartTagRenderer implements IHealthTagRenderer {
 
     private final Identifier icons = new Identifier("textures/gui/icons.png");
-    private final Config config = Config.getInstance();
 
     @Override
     public void renderHealthTag(MatrixStack matrices, PlayerEntity player, boolean hasLabel, float tickDelta, int light) {
         // Get the config values
-        int extraHeight = this.config.ExtraHeight.value();
-        int rowsOfHearts = this.config.RowsOfHearts.value();
-        int heartsSpacedBy_X = this.config.HeartsSpacedBy_X.value();
-        int heartsSpacedBy_Y = this.config.HeartsSpacedBy_Y.value();
+        Config config = Config.getInstance();
+        int extraHeight = config.ExtraHeight.value();
+        int rowsOfHearts = config.RowsOfHearts.value();
+        int heartsSpacedBy_X = config.HeartsSpacedBy_X.value();
+        int heartsSpacedBy_Y = config.HeartsSpacedBy_Y.value();
 
         // Get the x position
         float maxHealth = MathHelper.clamp(player.getMaxHealth(), 0, rowsOfHearts * 2);
@@ -64,9 +64,10 @@ public class HeartTagRenderer implements IHealthTagRenderer {
 
     private void drawContainers(MatrixStack matrices, int x, int y, int amount) {
         // Get the config values
-        int rowsOfHearts = this.config.RowsOfHearts.value();
-        int heartsSpacedBy_X = this.config.HeartsSpacedBy_X.value();
-        int heartsSpacedBy_Y = this.config.HeartsSpacedBy_Y.value();
+        Config config = Config.getInstance();
+        int rowsOfHearts = config.RowsOfHearts.value();
+        int heartsSpacedBy_X = config.HeartsSpacedBy_X.value();
+        int heartsSpacedBy_Y = config.HeartsSpacedBy_Y.value();
 
         // Set the width and height
         int width = 0, height = 0;
@@ -84,9 +85,10 @@ public class HeartTagRenderer implements IHealthTagRenderer {
 
     private void drawHearts(MatrixStack matrices, int x, int y, HeartType type, int amount, boolean isLastHalf) {
         // Get the config values
-        int rowsOfHearts = this.config.RowsOfHearts.value();
-        int heartsSpacedBy_X = this.config.HeartsSpacedBy_X.value();
-        int heartsSpacedBy_Y = this.config.HeartsSpacedBy_Y.value();
+        Config config = Config.getInstance();
+        int rowsOfHearts = config.RowsOfHearts.value();
+        int heartsSpacedBy_X = config.HeartsSpacedBy_X.value();
+        int heartsSpacedBy_Y = config.HeartsSpacedBy_Y.value();
 
         // Set the width and height
         int width = 0, height = 0;

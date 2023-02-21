@@ -1,13 +1,14 @@
 package nl.devpieter.healthtags.Config.Setting;
 
+import com.google.gson.annotations.Expose;
+
 public class Setting<T> {
 
+    @Expose
     private T value;
-    private final T defaultValue;
 
     public Setting(T value) {
         this.value = value;
-        this.defaultValue = value;
     }
 
     public T value() {
@@ -16,9 +17,5 @@ public class Setting<T> {
 
     public void value(T value) {
         this.value = value;
-    }
-
-    public T defaultValue() {
-        return defaultValue;
     }
 }

@@ -17,12 +17,4 @@ public class ClampSetting<T extends Number & Comparable<T>> extends Setting<T> {
         if (value > max.doubleValue()) return max;
         return super.value();
     }
-
-    @Override
-    public T defaultValue() {
-        double value = super.defaultValue().doubleValue();
-        if (value < min.doubleValue()) return min;
-        if (value > max.doubleValue()) return max;
-        return super.defaultValue();
-    }
 }
