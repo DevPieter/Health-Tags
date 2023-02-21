@@ -7,17 +7,21 @@ import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
+import nl.devpieter.healthtags.Config.Config;
 import nl.devpieter.healthtags.Enums.HeartType;
-import nl.devpieter.healthtags.HealthTags;
 
 import java.awt.*;
 
 public class PercentageTagRenderer implements IHealthTagRenderer {
 
     private final Identifier icons = new Identifier("textures/gui/icons.png");
+    private final Config config = Config.getInstance();
 
     @Override
     public void renderHealthTag(MatrixStack matrices, PlayerEntity player, boolean hasLabel, float tickDelta, int light) {
+        // Get the config values
+        int extraHeight = this.config.ExtraHeight.value();
+
         // Calculate the percentage
         float health = player.getHealth() + player.getAbsorptionAmount();
         int percentage = (int) (health / player.getMaxHealth() * 100);
@@ -30,7 +34,7 @@ public class PercentageTagRenderer implements IHealthTagRenderer {
         int x = -width / 2;
 
         // Get the y position
-        int y = (hasLabel ? -12 : -2) - HealthTags.extraHeight;
+        int y = (hasLabel ? -12 : -2) - extraHeight;
 
         // Enable the depth test and polygon offset
         RenderSystem.enableDepthTest();

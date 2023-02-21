@@ -1,6 +1,7 @@
 package nl.devpieter.healthtags;
 
 import net.minecraft.entity.player.PlayerEntity;
+import nl.devpieter.healthtags.Config.Config;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -16,6 +17,7 @@ public class TargetManager {
     }
 
     private final LinkedHashMap<PlayerEntity, Long> targets = new LinkedHashMap<>();
+    private final Config config = Config.getInstance();
 
     public void addTarget(PlayerEntity player) {
         if (this.targets.containsKey(player)) this.targets.replace(player, System.currentTimeMillis());
@@ -39,6 +41,7 @@ public class TargetManager {
     }
 
     public void update() {
-        this.targets.entrySet().removeIf(entry -> System.currentTimeMillis() - entry.getValue() > HealthTags.holdTime);
+        int targetHoldTime = this.config.TargetHoldTime.value();
+        this.targets.entrySet().removeIf(entry -> System.currentTimeMillis() - entry.getValue() > targetHoldTime);
     }
 }

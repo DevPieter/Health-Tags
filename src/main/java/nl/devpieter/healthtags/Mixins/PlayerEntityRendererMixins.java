@@ -8,7 +8,7 @@ import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.client.render.entity.model.PlayerEntityModel;
 import net.minecraft.client.util.math.MatrixStack;
-import nl.devpieter.healthtags.HealthTags;
+import nl.devpieter.healthtags.Config.Config;
 import nl.devpieter.healthtags.Renderers.IHealthTagRenderer;
 import nl.devpieter.healthtags.TargetManager;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,6 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class PlayerEntityRendererMixins extends LivingEntityRenderer<AbstractClientPlayerEntity, PlayerEntityModel<AbstractClientPlayerEntity>> {
 
     private final MinecraftClient client = MinecraftClient.getInstance();
+    private final Config config = Config.getInstance();
     private final TargetManager targetManager = TargetManager.getInstance();
 
     public PlayerEntityRendererMixins(EntityRendererFactory.Context ctx, PlayerEntityModel<AbstractClientPlayerEntity> model, float shadowRadius) {
@@ -28,14 +29,18 @@ public abstract class PlayerEntityRendererMixins extends LivingEntityRenderer<Ab
 
     @Inject(at = @At("TAIL"), method = "render(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V")
     public void render(AbstractClientPlayerEntity player, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider consumerProvider, int light, CallbackInfo ci) {
+        // Don't render if the player is invisible to the client player
         if (player.isInvisibleTo(this.client.player)) return;
 
-        IHealthTagRenderer renderer = HealthTags.selectedRenderer.getRenderer();
+        // Get the selected renderer
+        IHealthTagRenderer renderer = this.config.SelectedRenderer.value().getRenderer();
         if (renderer == null) return;
 
-        boolean showOnSelf = HealthTags.showOnSelf && player == this.client.player;
+        // Check if we should render the health tag
+        boolean showOnSelf = this.config.ShowOnSelf.value() && player == this.client.player;
         if (!(this.targetManager.isTarget(player) || showOnSelf)) return;
 
+        // Render the health tag
         matrices.push();
         matrices.translate(0.0, player.getHeight() + 0.5F, 0.0);
         matrices.multiply(this.dispatcher.getRotation());
