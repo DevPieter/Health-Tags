@@ -15,24 +15,23 @@ public class HeartTagRenderer implements IHealthTagRenderer {
 
     @Override
     public void renderHealthTag(MatrixStack matrices, PlayerEntity player, boolean hasLabel, float tickDelta, int light) {
-        // Get the x position of the health bar
+        // Get the x position
         float maxHealth = MathHelper.clamp(player.getMaxHealth(), 0, HealthTags.rowsOf * 2);
         int x = -(MathHelper.ceil(maxHealth / 2.0) * HealthTags.spacedBy) / 2;
 
-        // Get the y position of the health bar
+        // Get the y position
         int y = (hasLabel ? -10 : 0) - HealthTags.extraHeight;
 
-        // Draw the health bar
         // Get the amount of hearts and containers
         int hearts = MathHelper.ceil(player.getHealth() / 2.0);
         int containers = MathHelper.ceil(player.getMaxHealth() / 2.0);
         boolean isLastHalf = MathHelper.ceil(player.getHealth() % 2) != 0;
 
-        // Get the amount of absorption hearts and containers
+        // Get the amount of absorption hearts
         int absorptions = MathHelper.ceil(player.getAbsorptionAmount() / 2.0);
         boolean isLastAbsorptionHalf = MathHelper.ceil(player.getAbsorptionAmount() % 2) != 0;
 
-        // Enable the depth test and polygon offset
+        // Set the shader texture, enable the depth test and polygon offset
         RenderSystem.setShaderTexture(0, this.icons);
         RenderSystem.enableDepthTest();
         RenderSystem.enablePolygonOffset();

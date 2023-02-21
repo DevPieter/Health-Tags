@@ -66,7 +66,7 @@ public class PercentageTagRenderer implements IHealthTagRenderer {
     }
 
     private void drawHeart(MatrixStack matrices, int x, int y, HeartType type, int percentage) {
-        // Enable the depth test
+        // Set the shader texture and enable the depth test
         RenderSystem.setShaderTexture(0, this.icons);
         RenderSystem.enableDepthTest();
 
