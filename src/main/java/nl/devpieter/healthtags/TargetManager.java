@@ -9,10 +9,10 @@ import java.util.List;
 public class TargetManager {
 
     /* INSTANCE */
-    private static final TargetManager instance = new TargetManager();
+    private static final TargetManager INSTANCE = new TargetManager();
 
     public static TargetManager getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     private final LinkedHashMap<PlayerEntity, Long> targets = new LinkedHashMap<>();
