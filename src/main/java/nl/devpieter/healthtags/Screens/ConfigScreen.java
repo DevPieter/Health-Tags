@@ -3,12 +3,13 @@ package nl.devpieter.healthtags.Screens;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.CyclingButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import nl.devpieter.healthtags.Config.Config;
 import nl.devpieter.healthtags.Config.Setting.Setting;
 import nl.devpieter.healthtags.Config.Setting.SliderSetting;
 import nl.devpieter.healthtags.Enums.HealthTagRenderer;
-import nl.devpieter.healthtags.Screens.Widgets.SliderWidget;
+import nl.devpieter.healthtags.Screens.Widgets.ItemToggleWidget;
 
 import java.awt.*;
 import java.text.DecimalFormat;
@@ -40,24 +41,17 @@ public class ConfigScreen extends Screen {
         int widgetLeft = this.left + 10;
         int widgetWidth = (this.right - 10) - (widgetLeft);
 
-        /* === Global settings === */
-        // TODO: Enabled
+        this.addDrawableChild(new ItemToggleWidget(this.right / 2 - 48, 30, this.config.Enabled.get(), this.config.Enabled::set)).setItem(Items.NAME_TAG.getDefaultStack());
+        this.addDrawableChild(new ItemToggleWidget(this.right / 2 + 24, 30, this.config.ShowOnSelf.get(), this.config.ShowOnSelf::set)).setItem(Items.SPYGLASS.getDefaultStack());
 
-        SliderWidget extraHeightSlider = new SliderWidget(widgetLeft, 20, widgetWidth, "config.healthtags.extra_height");
-        extraHeightSlider.setFormat(this.wholeNumberFormat);
-        extraHeightSlider.setValues(this.config.ExtraHeight.get(), -20, 60);
-        extraHeightSlider.setCallback(value -> this.config.ExtraHeight.set((int) Math.round(value)));
-        this.addDrawableChild(extraHeightSlider);
-
-        // TODO: ShowOnSelf
+        this.addDrawableChild(this.config.ExtraHeight.getSliderWidget(widgetLeft, 80, widgetWidth)).setFormat(this.wholeNumberFormat);
+        this.addDrawableChild(this.config.TargetHoldTime.getSliderWidget(widgetLeft, 110, widgetWidth)).setFormat(this.wholeNumberFormat);
 
         this.addDrawableChild(CyclingButtonWidget.builder(HealthTagRenderer::getName)
                 .values(HealthTagRenderer.values())
                 .initially(this.config.SelectedRenderer.get())
                 .omitKeyText()
                 .build(widgetLeft, this.bottom - 30, widgetWidth, 20, Text.empty(), (button, renderer) -> this.config.SelectedRenderer.set(renderer)));
-
-        /* === Settings for HeartTagRenderer === */
 
         for (HealthTagRenderer renderer : HealthTagRenderer.values()) {
             if (renderer.getRenderer() == null) continue;
@@ -67,12 +61,9 @@ public class ConfigScreen extends Screen {
                 Setting<?> setting = settings.get(i);
 
                 if (!(setting instanceof SliderSetting sliderSetting)) continue;
-                this.addDrawableChild(sliderSetting.getSliderWidget(this.width - widgetWidth - 10, 10 + (30 * i), widgetWidth)).setFormat(this.wholeNumberFormat);
+                this.addDrawableChild(sliderSetting.getSliderWidget(widgetLeft, (this.height / 2) - (settings.size() * 20) + (30 * i) + 40, widgetWidth)).setFormat(this.wholeNumberFormat);
             }
         }
-
-        /* === Settings for TargetManager === */
-        // TODO: TargetHoldTime
     }
 
     @Override

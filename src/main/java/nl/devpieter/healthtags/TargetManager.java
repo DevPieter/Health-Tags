@@ -41,7 +41,7 @@ public class TargetManager {
     }
 
     public void update() {
-        int targetHoldTime = this.config.TargetHoldTime.get();
+        int targetHoldTime = this.config.TargetHoldTime.get() * 1000;
         this.targets.entrySet().removeIf(entry -> System.currentTimeMillis() - entry.getValue() > targetHoldTime);
     }
 }

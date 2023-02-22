@@ -3,8 +3,8 @@ package nl.devpieter.healthtags.Config;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
-import nl.devpieter.healthtags.Config.Setting.ClampSetting;
 import nl.devpieter.healthtags.Config.Setting.Setting;
+import nl.devpieter.healthtags.Config.Setting.SliderSetting;
 import nl.devpieter.healthtags.Enums.HealthTagRenderer;
 import nl.devpieter.healthtags.Utils.FileUtils;
 
@@ -25,13 +25,13 @@ public class Config {
     @Expose
     public Setting<Boolean> ShowOnSelf = new Setting<>(true);
     @Expose
-    public ClampSetting<Integer> ExtraHeight = new ClampSetting<>(2, -20, 60);
+    public SliderSetting ExtraHeight = new SliderSetting(2, -20, 60, "config.healthtags.extra_height");
     @Expose
     public Setting<HealthTagRenderer> SelectedRenderer = new Setting<>(HealthTagRenderer.HEART);
 
-    /* === Settings for TargetManager === */
+    /* === TargetManager settings === */
     @Expose
-    public ClampSetting<Integer> TargetHoldTime = new ClampSetting<>(5 * 1000, 0, 60 * 1000);
+    public SliderSetting TargetHoldTime = new SliderSetting(5, 0, 60, "config.healthtags.target_hold_time");
 
     public void save() {
         File configFile = FileUtils.getConfigFile("config");
