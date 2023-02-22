@@ -50,31 +50,27 @@ public class ConfigScreen extends Screen {
 
         // TODO: ShowOnSelf
 
-        CyclingButtonWidget<HealthTagRenderer> selectedRendererButton = CyclingButtonWidget.builder(HealthTagRenderer::getName)
+        this.addDrawableChild(CyclingButtonWidget.builder(HealthTagRenderer::getName)
                 .values(HealthTagRenderer.values())
                 .initially(this.config.SelectedRenderer.get())
                 .omitKeyText()
-                .build(widgetLeft, this.bottom - 30, widgetWidth, 20, Text.empty(), (button, renderer) -> this.config.SelectedRenderer.set(renderer));
-        this.addDrawableChild(selectedRendererButton);
+                .build(widgetLeft, this.bottom - 30, widgetWidth, 20, Text.empty(), (button, renderer) -> this.config.SelectedRenderer.set(renderer)));
 
         /* === Settings for HeartTagRenderer === */
-        this.heartsInRowSlider = new SliderWidget(widgetLeft, 50, widgetWidth, "config.healthtags.hearts_in_row");
+        this.heartsInRowSlider = this.addDrawableChild(new SliderWidget(widgetLeft, 50, widgetWidth, "config.healthtags.hearts_in_row"));
         this.heartsInRowSlider.setFormat(this.wholeNumberFormat);
         this.heartsInRowSlider.setValues(this.config.HeartsInRow.get(), 5, 25);
         this.heartsInRowSlider.setCallback(value -> this.config.HeartsInRow.set((int) Math.round(value)));
-        this.addDrawableChild(heartsInRowSlider);
 
-        this.heartsSpacedBy_XSlider = new SliderWidget(widgetLeft, 80, widgetWidth, "config.healthtags.hearts_spaced_by_x");
+        this.heartsSpacedBy_XSlider = this.addDrawableChild(new SliderWidget(widgetLeft, 80, widgetWidth, "config.healthtags.hearts_spaced_by_x"));
         this.heartsSpacedBy_XSlider.setFormat(this.wholeNumberFormat);
         this.heartsSpacedBy_XSlider.setValues(this.config.HeartsSpacedBy_X.get(), 6, 16);
         this.heartsSpacedBy_XSlider.setCallback(value -> this.config.HeartsSpacedBy_X.set((int) Math.round(value)));
-        this.addDrawableChild(heartsSpacedBy_XSlider);
 
-        this.heartsSpacedBy_YSlider = new SliderWidget(widgetLeft, 110, widgetWidth, "config.healthtags.hearts_spaced_by_y");
+        this.heartsSpacedBy_YSlider = this.addDrawableChild(new SliderWidget(widgetLeft, 110, widgetWidth, "config.healthtags.hearts_spaced_by_y"));
         this.heartsSpacedBy_YSlider.setFormat(this.wholeNumberFormat);
         this.heartsSpacedBy_YSlider.setValues(this.config.HeartsSpacedBy_Y.get(), 6, 16);
         this.heartsSpacedBy_YSlider.setCallback(value -> this.config.HeartsSpacedBy_Y.set((int) Math.round(value)));
-        this.addDrawableChild(heartsSpacedBy_YSlider);
 
         /* === Settings for TargetManager === */
         // TODO: TargetHoldTime
