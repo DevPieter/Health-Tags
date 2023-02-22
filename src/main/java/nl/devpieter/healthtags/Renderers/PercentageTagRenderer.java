@@ -19,8 +19,7 @@ public class PercentageTagRenderer implements IHealthTagRenderer {
     @Override
     public void renderHealthTag(MatrixStack matrices, PlayerEntity player, boolean hasLabel, float tickDelta, int light) {
         // Get the config values
-        Config config = Config.getInstance();
-        int extraHeight = config.ExtraHeight.get();
+        int extraHeight = Config.getInstance().ExtraHeight.get();
 
         // Calculate the percentage
         float health = player.getHealth() + player.getAbsorptionAmount();

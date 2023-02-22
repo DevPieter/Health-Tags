@@ -1,5 +1,6 @@
 package nl.devpieter.healthtags.Renderers;
 
+import com.google.gson.annotations.Expose;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
@@ -7,20 +8,37 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import nl.devpieter.healthtags.Config.Config;
+import nl.devpieter.healthtags.Config.Setting.Setting;
+import nl.devpieter.healthtags.Config.Setting.SliderSetting;
 import nl.devpieter.healthtags.Enums.HeartType;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class HeartTagRenderer implements IHealthTagRenderer {
 
     private final Identifier icons = new Identifier("textures/gui/icons.png");
 
+    /* === Settings === */
+    @Expose
+    public final SliderSetting heartsInRow = new SliderSetting(10, 5, 25, "config.healthtags.hearts_in_row");
+    @Expose
+    public final SliderSetting heartsSpacedBy_X = new SliderSetting(8, 6, 16, "config.healthtags.hearts_spaced_by_x");
+    @Expose
+    public final SliderSetting heartsSpacedBy_Y = new SliderSetting(10, 6, 16, "config.healthtags.hearts_spaced_by_y");
+
+    @Override
+    public @NotNull List<Setting<?>> getSettings() {
+        return List.of(this.heartsInRow, this.heartsSpacedBy_X, this.heartsSpacedBy_Y);
+    }
+
     @Override
     public void renderHealthTag(MatrixStack matrices, PlayerEntity player, boolean hasLabel, float tickDelta, int light) {
         // Get the config values
-        Config config = Config.getInstance();
-        int extraHeight = config.ExtraHeight.get();
-        int heartsInRow = config.HeartsInRow.get();
-        int heartsSpacedBy_X = config.HeartsSpacedBy_X.get();
-        int heartsSpacedBy_Y = config.HeartsSpacedBy_Y.get();
+        int extraHeight = Config.getInstance().ExtraHeight.get();
+        int heartsInRow = this.heartsInRow.get();
+        int heartsSpacedBy_X = this.heartsSpacedBy_X.get();
+        int heartsSpacedBy_Y = this.heartsSpacedBy_Y.get();
 
         // Get the x position
         float maxHealth = MathHelper.clamp(player.getMaxHealth(), 0, heartsInRow * 2);
@@ -64,10 +82,9 @@ public class HeartTagRenderer implements IHealthTagRenderer {
 
     private void drawContainers(MatrixStack matrices, int x, int y, int amount) {
         // Get the config values
-        Config config = Config.getInstance();
-        int heartsInRow = config.HeartsInRow.get();
-        int heartsSpacedBy_X = config.HeartsSpacedBy_X.get();
-        int heartsSpacedBy_Y = config.HeartsSpacedBy_Y.get();
+        int heartsInRow = this.heartsInRow.get();
+        int heartsSpacedBy_X = this.heartsSpacedBy_X.get();
+        int heartsSpacedBy_Y = this.heartsSpacedBy_Y.get();
 
         // Set the width and height
         int width = 0, height = 0;
@@ -85,10 +102,9 @@ public class HeartTagRenderer implements IHealthTagRenderer {
 
     private void drawHearts(MatrixStack matrices, int x, int y, HeartType type, int amount, boolean isLastHalf) {
         // Get the config values
-        Config config = Config.getInstance();
-        int heartsInRow = config.HeartsInRow.get();
-        int heartsSpacedBy_X = config.HeartsSpacedBy_X.get();
-        int heartsSpacedBy_Y = config.HeartsSpacedBy_Y.get();
+        int heartsInRow = this.heartsInRow.get();
+        int heartsSpacedBy_X = this.heartsSpacedBy_X.get();
+        int heartsSpacedBy_Y = this.heartsSpacedBy_Y.get();
 
         // Set the width and height
         int width = 0, height = 0;

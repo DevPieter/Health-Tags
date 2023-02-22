@@ -1,25 +1,70 @@
 package nl.devpieter.healthtags.Enums;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import net.minecraft.text.Text;
 import nl.devpieter.healthtags.Renderers.HeartTagRenderer;
 import nl.devpieter.healthtags.Renderers.IHealthTagRenderer;
 import nl.devpieter.healthtags.Renderers.PercentageTagRenderer;
+import nl.devpieter.healthtags.Utils.FileUtils;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.*;
+
 public enum HealthTagRenderer {
-    HEART("heart", new HeartTagRenderer()),
-    PERCENTAGE("percentage", new PercentageTagRenderer()),
+
+    HEART("heart", HeartTagRenderer.class),
+    PERCENTAGE("percentage", PercentageTagRenderer.class),
     NONE("none", null);
 
     private final String translationKey;
     @Nullable
     private final IHealthTagRenderer renderer;
 
-    HealthTagRenderer(String translationKey, @Nullable IHealthTagRenderer renderer) {
+    HealthTagRenderer(String translationKey, @Nullable Class<? extends IHealthTagRenderer> rendererClass) {
         this.translationKey = translationKey;
-        this.renderer = renderer;
+        this.renderer = this.createNewRenderer(rendererClass);
+        this.saveSettings();
     }
 
+    private IHealthTagRenderer createNewRenderer(Class<? extends IHealthTagRenderer> rendererClass) {
+        if (rendererClass == null) return null;
+
+        File configFile = FileUtils.getRendererConfigFile(this.name().toLowerCase());
+        FileUtils.createFileIfNotExists(configFile);
+
+        try (Reader reader = new FileReader(configFile)) {
+            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
+            IHealthTagRenderer newRenderer = gson.fromJson(reader, rendererClass);
+
+            return newRenderer == null ? rendererClass.getConstructor().newInstance() : newRenderer;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            return rendererClass.getConstructor().newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void saveSettings() {
+        if (this.renderer == null) return;
+
+        File configFile = FileUtils.getRendererConfigFile(this.name().toLowerCase());
+        FileUtils.createFileIfNotExists(configFile);
+
+        try (Writer writer = new FileWriter(configFile)) {
+            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
+            gson.toJson(this.renderer, writer);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /* === Getters === */
     public Text getName() {
         return Text.translatable("renderer.healthtags." + this.translationKey);
     }
@@ -27,5 +72,10 @@ public enum HealthTagRenderer {
     @Nullable
     public IHealthTagRenderer getRenderer() {
         return this.renderer;
+    }
+
+    /* === Static methods === */
+    public static void saveAllSettings() {
+        for (HealthTagRenderer renderer : HealthTagRenderer.values()) renderer.saveSettings();
     }
 }
