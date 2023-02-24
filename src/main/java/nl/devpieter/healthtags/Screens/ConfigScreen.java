@@ -9,7 +9,7 @@ import nl.devpieter.healthtags.Config.Setting.Setting;
 import nl.devpieter.healthtags.Config.WidgetSetting.EnumWidgetSetting;
 import nl.devpieter.healthtags.Config.WidgetSetting.SliderWidgetSetting;
 import nl.devpieter.healthtags.Enums.HealthTagRenderer;
-import nl.devpieter.healthtags.Screens.Widgets.ItemToggleWidget;
+import nl.devpieter.healthtags.Screens.Widgets.ToggleWidget;
 
 import java.awt.*;
 import java.text.DecimalFormat;
@@ -41,8 +41,11 @@ public class ConfigScreen extends Screen {
         int widgetLeft = this.left + 10;
         int widgetWidth = (this.right - 10) - (widgetLeft);
 
-        this.addDrawableChild(new ItemToggleWidget(this.right / 2 - 48, 40, this.config.Enabled.get(), this.config.Enabled::set)).setItem(Items.NAME_TAG.getDefaultStack());
-        this.addDrawableChild(new ItemToggleWidget(this.right / 2 + 24, 40, this.config.ShowOnSelf.get(), this.config.ShowOnSelf::set)).setItem(Items.SPYGLASS.getDefaultStack());
+        /* Global Settings */
+//        this.addDrawableChild(new ToggleWidget(this.right / 2 - 48, 40, this.config.Enabled.get(), this.config.Enabled::set)).setItem(Items.NAME_TAG.getDefaultStack());
+//        this.addDrawableChild(new ToggleWidget(this.right / 2 + 24, 40, this.config.ShowOnSelf.get(), this.config.ShowOnSelf::set)).setItem(Items.SPYGLASS.getDefaultStack());
+        this.addDrawableChild(this.config.Enabled.getWidget(this.right / 3 - 48, 40, widgetWidth / 3, 20));
+        this.addDrawableChild(this.config.ShowOnSelf.getWidget(this.right / 2 + 24, 40, widgetWidth / 3, 20));
 
         this.addDrawableChild(this.config.ExtraHeight.getWidget(widgetLeft, 80, widgetWidth, 20)).setFormat(this.wholeNumberFormat);
         this.addDrawableChild(this.config.TargetHoldTime.getWidget(widgetLeft, 110, widgetWidth, 20)).setFormat(this.wholeNumberFormat);
@@ -50,6 +53,8 @@ public class ConfigScreen extends Screen {
         EnumWidgetSetting<HealthTagRenderer> selectedRenderer = this.config.SelectedRenderer;
         selectedRenderer.setValues(HealthTagRenderer::getName, HealthTagRenderer.values());
         this.addDrawableChild(selectedRenderer.getWidget(widgetLeft, this.bottom - 30, widgetWidth, 20));
+
+        /* Renderer Settings */
 
         for (HealthTagRenderer renderer : HealthTagRenderer.values()) {
             if (renderer.getRenderer() == null) continue;
