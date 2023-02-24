@@ -1,29 +1,21 @@
 package nl.devpieter.healthtags.Screens;
 
-import net.minecraft.client.gui.screen.Screen;
+import net.minecraft.client.gui.tooltip.Tooltip;
+import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.item.Items;
 import net.minecraft.text.Text;
-import nl.devpieter.healthtags.Config.Config;
 import nl.devpieter.healthtags.Config.Setting.Setting;
 import nl.devpieter.healthtags.Config.WidgetSetting.EnumWidgetSetting;
 import nl.devpieter.healthtags.Config.WidgetSetting.SliderWidgetSetting;
 import nl.devpieter.healthtags.Enums.HealthTagRenderer;
-import nl.devpieter.healthtags.Screens.Widgets.ToggleWidget;
+import nl.devpieter.healthtags.Renderers.IHealthTagRenderer;
 
-import java.awt.*;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class ConfigScreen extends Screen {
+public class ConfigScreen extends BaseScreen {
 
-    private final Config config = Config.getInstance();
     private final DecimalFormat wholeNumberFormat = new DecimalFormat("#");
-
-    private int left, right, top, bottom;
-    private final Color backgroundColor = new Color(47, 48, 55, 240);
-    private final Color titleColor = new Color(233, 164, 155);
-    private final Color textColor = new Color(255, 255, 255);
 
     public ConfigScreen() {
         // TODO: Move to translation file
@@ -32,61 +24,33 @@ public class ConfigScreen extends Screen {
 
     @Override
     protected void init() {
-        this.left = 0;
-        this.right = this.width / 3;
+        super.init();
 
-        this.top = 0;
-        this.bottom = this.height;
+        int buttonWidth = (this.widgetWidth / 2) - 5;
+        this.addDrawableChild(this.config.Enabled.getWidget(this.widgetLeft, 40, buttonWidth, 20));
+        this.addDrawableChild(this.config.ShowOnSelf.getWidget(this.widgetRight - buttonWidth, 40, buttonWidth, 20));
 
-        int widgetLeft = this.left + 10;
-        int widgetRight = this.right - 10;
-        int widgetWidth = (this.right - 10) - (widgetLeft);
-
-        int buttonWidth = (widgetWidth / 2) - 5;
-        this.addDrawableChild(this.config.Enabled.getWidget(widgetLeft, 40, buttonWidth, 20));
-        this.addDrawableChild(this.config.ShowOnSelf.getWidget(widgetRight - buttonWidth, 40, buttonWidth, 20));
-
-        this.addDrawableChild(this.config.ExtraHeight.getWidget(widgetLeft, 70, widgetWidth, 20)).setFormat(this.wholeNumberFormat);
-        this.addDrawableChild(this.config.TargetHoldTime.getWidget(widgetLeft, 100, widgetWidth, 20)).setFormat(this.wholeNumberFormat);
+        this.addDrawableChild(this.config.ExtraHeight.getWidget(this.widgetLeft, 70, this.widgetWidth, 20)).setFormat(this.wholeNumberFormat);
+        this.addDrawableChild(this.config.TargetHoldTime.getWidget(this.widgetLeft, 100, this.widgetWidth, 20)).setFormat(this.wholeNumberFormat);
 
         EnumWidgetSetting<HealthTagRenderer> selectedRenderer = this.config.SelectedRenderer;
         selectedRenderer.setValues(HealthTagRenderer::getName, HealthTagRenderer.values());
-        this.addDrawableChild(selectedRenderer.getWidget(widgetLeft, this.bottom - 30, widgetWidth, 20));
+        this.addDrawableChild(selectedRenderer.getWidget(this.widgetLeft, this.bottom - 30, buttonWidth, 20));
 
-        /* Renderer Settings */
+        // TODO: Translation
+        this.addDrawableChild(ButtonWidget.builder(Text.of("Edit"), button -> {
+            if (this.client == null) return;
 
-        for (HealthTagRenderer renderer : HealthTagRenderer.values()) {
-            if (renderer.getRenderer() == null) continue;
-            List<Setting<?>> settings = renderer.getRenderer().getSettings();
+            IHealthTagRenderer tagRenderer = selectedRenderer.get().getRenderer();
+            if (tagRenderer == null || tagRenderer.getSettings().isEmpty()) return;
 
-            for (int i = 0; i < settings.size(); i++) {
-                Setting<?> setting = settings.get(i);
-
-                if (!(setting instanceof SliderWidgetSetting sliderSetting)) continue;
-                this.addDrawableChild(sliderSetting.getWidget(widgetLeft, (this.height / 2) - (settings.size() * 20) + (30 * i) + (140) / 2, widgetWidth, 20)).setFormat(this.wholeNumberFormat);
-            }
-        }
+            this.client.setScreen(new RendererConfigScreen(selectedRenderer.get()));
+        }).dimensions(this.widgetRight - buttonWidth, this.bottom - 30, buttonWidth, 20).build());
     }
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        fill(matrices, this.left, this.top, this.right, this.bottom, this.backgroundColor.getRGB());
-        drawCenteredText(matrices, this.textRenderer, this.title, this.right / 2, 10, this.titleColor.getRGB());
-
+        this.renderBackground(matrices);
         super.render(matrices, mouseX, mouseY, delta);
-    }
-
-    @Override
-    public void close() {
-        // Save settings on close
-        this.config.save();
-        HealthTagRenderer.saveAllSettings();
-
-        super.close();
-    }
-
-    @Override
-    public boolean shouldPause() {
-        return false;
     }
 }
