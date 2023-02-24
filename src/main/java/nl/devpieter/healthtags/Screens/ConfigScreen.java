@@ -7,6 +7,7 @@ import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import nl.devpieter.healthtags.Config.Config;
 import nl.devpieter.healthtags.Config.Setting.Setting;
+import nl.devpieter.healthtags.Config.WidgetSetting.EnumWidgetSetting;
 import nl.devpieter.healthtags.Config.WidgetSetting.SliderWidgetSetting;
 import nl.devpieter.healthtags.Enums.HealthTagRenderer;
 import nl.devpieter.healthtags.Screens.Widgets.ItemToggleWidget;
@@ -47,11 +48,15 @@ public class ConfigScreen extends Screen {
         this.addDrawableChild(this.config.ExtraHeight.getWidget(widgetLeft, 80, widgetWidth, 20)).setFormat(this.wholeNumberFormat);
         this.addDrawableChild(this.config.TargetHoldTime.getWidget(widgetLeft, 110, widgetWidth, 20)).setFormat(this.wholeNumberFormat);
 
-        this.addDrawableChild(CyclingButtonWidget.builder(HealthTagRenderer::getName)
-                .values(HealthTagRenderer.values())
-                .initially(this.config.SelectedRenderer.get())
-                .omitKeyText()
-                .build(widgetLeft, this.bottom - 30, widgetWidth, 20, Text.empty(), (button, renderer) -> this.config.SelectedRenderer.set(renderer)));
+//        this.addDrawableChild(CyclingButtonWidget.builder(HealthTagRenderer::getName)
+//                .values(HealthTagRenderer.values())
+//                .initially(this.config.SelectedRenderer.get())
+//                .omitKeyText()
+//                .build(widgetLeft, this.bottom - 30, widgetWidth, 20, Text.empty(), (button, renderer) -> this.config.SelectedRenderer.set(renderer)));
+
+        EnumWidgetSetting<HealthTagRenderer> selectedRenderer = this.config.SelectedRenderer;
+        selectedRenderer.setValues(HealthTagRenderer::getName, HealthTagRenderer.values());
+        this.addDrawableChild(selectedRenderer.getWidget(widgetLeft, this.bottom - 30, widgetWidth, 20));
 
         for (HealthTagRenderer renderer : HealthTagRenderer.values()) {
             if (renderer.getRenderer() == null) continue;

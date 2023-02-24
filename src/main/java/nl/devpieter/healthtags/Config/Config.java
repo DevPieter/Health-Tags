@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 import nl.devpieter.healthtags.Config.Setting.Setting;
+import nl.devpieter.healthtags.Config.WidgetSetting.EnumWidgetSetting;
 import nl.devpieter.healthtags.Config.WidgetSetting.SliderWidgetSetting;
 import nl.devpieter.healthtags.Config.WidgetSetting.ToggleWidgetSetting;
 import nl.devpieter.healthtags.Enums.HealthTagRenderer;
@@ -28,7 +29,7 @@ public class Config {
     @Expose
     public SliderWidgetSetting ExtraHeight = new SliderWidgetSetting(2, -20, 60, "config.healthtags.extra_height");
     @Expose
-    public Setting<HealthTagRenderer> SelectedRenderer = new Setting<>(HealthTagRenderer.HEART);
+    public EnumWidgetSetting<HealthTagRenderer> SelectedRenderer = new EnumWidgetSetting<>(HealthTagRenderer.HEART);
 
     /* === TargetManager settings === */
     @Expose
