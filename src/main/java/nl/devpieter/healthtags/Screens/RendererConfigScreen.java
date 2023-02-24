@@ -16,7 +16,7 @@ public class RendererConfigScreen extends ConfigScreenBase {
     private final DecimalFormat wholeNumberFormat = new DecimalFormat("#");
     private final HealthTagRenderer renderer;
 
-    protected RendererConfigScreen(HealthTagRenderer renderer, Screen parent) {
+    public RendererConfigScreen(HealthTagRenderer renderer, Screen parent) {
         // TODO Translation
         super(Text.translatable("Configuring '%s'", renderer.getName()), parent);
         this.renderer = renderer;

@@ -9,6 +9,7 @@ public class Keybindings {
 
     public static final KeyBinding TOGGLE = register("toggle", GLFW.GLFW_KEY_H);
     public static final KeyBinding OPEN_CONFIG_SCREEN = register("open_config_screen", GLFW.GLFW_KEY_C);
+    public static final KeyBinding OPEN_RENDERER_CONFIG_SCREEN = register("open_renderer_config_screen", GLFW.GLFW_KEY_R);
 
     private static KeyBinding register(String name, int code) {
         KeyBinding keyBinding = new KeyBinding("key.healthtags." + name, InputUtil.Type.KEYSYM, code, "category.healthtags");
