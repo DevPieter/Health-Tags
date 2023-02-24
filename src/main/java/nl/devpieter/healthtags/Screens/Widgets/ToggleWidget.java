@@ -61,8 +61,7 @@ public class ToggleWidget extends ClickableWidget {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        boolean isClicked = super.mouseClicked(mouseX, mouseY, button);
-        if (!isClicked) return true;
+        if (!super.mouseClicked(mouseX, mouseY, button)) return true;
 
         this.toggled = !this.toggled;
         if (this.callback != null) this.callback.onToggle(this.toggled);
