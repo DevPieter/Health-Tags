@@ -34,18 +34,18 @@ public class ConfigScreen extends ConfigScreenBase {
         // Selected Renderer
         EnumWidgetSetting<HealthTagRenderer> selectedRenderer = this.config.SelectedRenderer;
         selectedRenderer.setValues(HealthTagRenderer::getName, HealthTagRenderer.values());
-        this.addDrawableChild(selectedRenderer.getWidget(this.widgetLeft, this.bottom - 30, buttonWidth, 20));
+        this.addDrawableChild(selectedRenderer.getWidget(this.widgetLeft, this.bottom - 30, buttonWidth + 30, 20));
 
         // Edit Button
         // TODO: Translation
-        this.addDrawableChild(ButtonWidget.builder(Text.of("Edit"), button -> {
+        this.addDrawableChild(ButtonWidget.builder(Text.of("Settings"), button -> {
             if (this.client == null) return;
 
             IHealthTagRenderer tagRenderer = selectedRenderer.get().getRenderer();
             if (tagRenderer == null || tagRenderer.getSettings().isEmpty()) return;
 
             this.client.setScreen(new RendererConfigScreen(selectedRenderer.get()));
-        }).dimensions(this.widgetRight - buttonWidth, this.bottom - 30, buttonWidth, 20).build());
+        }).dimensions(this.widgetRight - buttonWidth + 30, this.bottom - 30, buttonWidth - 30, 20).build());
     }
 
     @Override

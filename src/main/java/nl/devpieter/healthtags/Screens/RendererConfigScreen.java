@@ -27,10 +27,8 @@ public class RendererConfigScreen extends ConfigScreenBase {
         super.init();
 
         // TODO: Translation
-        this.addDrawableChild(ButtonWidget.builder(Text.of("Back"), button -> {
-            if (this.client == null) return;
-            this.client.setScreen(new ConfigScreen());
-        }).dimensions(this.widgetLeft, this.bottom - 30, this.widgetWidth, 20).build());
+        this.addDrawableChild(ButtonWidget.builder(Text.of("Back"), button -> this.close())
+                .dimensions(this.widgetLeft, this.bottom - 30, this.widgetWidth, 20).build());
 
         IHealthTagRenderer tagRenderer = this.renderer.getRenderer();
         if (tagRenderer == null) return;
@@ -48,8 +46,6 @@ public class RendererConfigScreen extends ConfigScreenBase {
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         this.renderBackground(matrices);
         super.render(matrices, mouseX, mouseY, delta);
-
-
     }
 
     @Override
