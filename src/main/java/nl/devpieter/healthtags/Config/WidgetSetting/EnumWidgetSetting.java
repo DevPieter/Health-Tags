@@ -24,6 +24,9 @@ public class EnumWidgetSetting<T extends Enum<T>> extends Setting<T> implements 
 
     @Override
     public @NotNull CyclingButtonWidget<T> getWidget(int x, int y, int width, int height) {
+        if (this.valueToText == null || this.values == null)
+            throw new IllegalStateException("Values have not been set yet!");
+
         return CyclingButtonWidget
                 .builder(this.valueToText)
                 .values(this.values)
