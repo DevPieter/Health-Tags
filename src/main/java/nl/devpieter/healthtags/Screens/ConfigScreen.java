@@ -1,7 +1,6 @@
 package nl.devpieter.healthtags.Screens;
 
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.widget.CyclingButtonWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.item.Items;
 import net.minecraft.text.Text;
@@ -47,12 +46,6 @@ public class ConfigScreen extends Screen {
 
         this.addDrawableChild(this.config.ExtraHeight.getWidget(widgetLeft, 80, widgetWidth, 20)).setFormat(this.wholeNumberFormat);
         this.addDrawableChild(this.config.TargetHoldTime.getWidget(widgetLeft, 110, widgetWidth, 20)).setFormat(this.wholeNumberFormat);
-
-//        this.addDrawableChild(CyclingButtonWidget.builder(HealthTagRenderer::getName)
-//                .values(HealthTagRenderer.values())
-//                .initially(this.config.SelectedRenderer.get())
-//                .omitKeyText()
-//                .build(widgetLeft, this.bottom - 30, widgetWidth, 20, Text.empty(), (button, renderer) -> this.config.SelectedRenderer.set(renderer)));
 
         EnumWidgetSetting<HealthTagRenderer> selectedRenderer = this.config.SelectedRenderer;
         selectedRenderer.setValues(HealthTagRenderer::getName, HealthTagRenderer.values());

@@ -3,7 +3,6 @@ package nl.devpieter.healthtags.Config;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
-import nl.devpieter.healthtags.Config.Setting.Setting;
 import nl.devpieter.healthtags.Config.WidgetSetting.EnumWidgetSetting;
 import nl.devpieter.healthtags.Config.WidgetSetting.SliderWidgetSetting;
 import nl.devpieter.healthtags.Config.WidgetSetting.ToggleWidgetSetting;
