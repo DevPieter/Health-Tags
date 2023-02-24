@@ -8,7 +8,7 @@ import nl.devpieter.healthtags.Enums.HealthTagRenderer;
 
 import java.awt.*;
 
-public class BaseScreen extends Screen {
+public class ConfigScreenBase extends Screen {
 
     protected final Config config = Config.getInstance();
 
@@ -19,7 +19,7 @@ public class BaseScreen extends Screen {
     protected int left, right, top, bottom;
     protected int widgetLeft, widgetRight, widgetWidth;
 
-    protected BaseScreen(Text title) {
+    protected ConfigScreenBase(Text title) {
         super(title);
     }
 

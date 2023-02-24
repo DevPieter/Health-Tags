@@ -11,7 +11,7 @@ import nl.devpieter.healthtags.Renderers.IHealthTagRenderer;
 import java.text.DecimalFormat;
 import java.util.List;
 
-public class RendererConfigScreen extends BaseScreen {
+public class RendererConfigScreen extends ConfigScreenBase {
 
     private final DecimalFormat wholeNumberFormat = new DecimalFormat("#");
     private final HealthTagRenderer renderer;
