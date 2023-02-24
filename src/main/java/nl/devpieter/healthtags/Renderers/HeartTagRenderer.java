@@ -9,7 +9,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import nl.devpieter.healthtags.Config.Config;
 import nl.devpieter.healthtags.Config.Setting.Setting;
-import nl.devpieter.healthtags.Config.WidgetSetting.SliderSetting;
+import nl.devpieter.healthtags.Config.WidgetSetting.SliderWidgetSetting;
 import nl.devpieter.healthtags.Enums.HeartType;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,11 +21,11 @@ public class HeartTagRenderer implements IHealthTagRenderer {
 
     /* === Settings === */
     @Expose
-    public final SliderSetting heartsInRow = new SliderSetting(10, 5, 25, "config.healthtags.hearts_in_row");
+    public final SliderWidgetSetting heartsInRow = new SliderWidgetSetting(10, 5, 25, "config.healthtags.hearts_in_row");
     @Expose
-    public final SliderSetting heartsSpacedBy_X = new SliderSetting(8, 6, 16, "config.healthtags.hearts_spaced_by_x");
+    public final SliderWidgetSetting heartsSpacedBy_X = new SliderWidgetSetting(8, 6, 16, "config.healthtags.hearts_spaced_by_x");
     @Expose
-    public final SliderSetting heartsSpacedBy_Y = new SliderSetting(10, 6, 16, "config.healthtags.hearts_spaced_by_y");
+    public final SliderWidgetSetting heartsSpacedBy_Y = new SliderWidgetSetting(10, 6, 16, "config.healthtags.hearts_spaced_by_y");
 
     @Override
     public @NotNull List<Setting<?>> getSettings() {

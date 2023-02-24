@@ -4,8 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 import nl.devpieter.healthtags.Config.Setting.Setting;
-import nl.devpieter.healthtags.Config.WidgetSetting.SliderSetting;
-import nl.devpieter.healthtags.Config.WidgetSetting.ToggleSetting;
+import nl.devpieter.healthtags.Config.WidgetSetting.SliderWidgetSetting;
+import nl.devpieter.healthtags.Config.WidgetSetting.ToggleWidgetSetting;
 import nl.devpieter.healthtags.Enums.HealthTagRenderer;
 import nl.devpieter.healthtags.Utils.FileUtils;
 
@@ -22,17 +22,17 @@ public class Config {
 
     /* === Global settings === */
     @Expose
-    public ToggleSetting Enabled = new ToggleSetting(true, "todo");
+    public ToggleWidgetSetting Enabled = new ToggleWidgetSetting(true, "todo");
     @Expose
-    public ToggleSetting ShowOnSelf = new ToggleSetting(true, "todo");
+    public ToggleWidgetSetting ShowOnSelf = new ToggleWidgetSetting(true, "todo");
     @Expose
-    public SliderSetting ExtraHeight = new SliderSetting(2, -20, 60, "config.healthtags.extra_height");
+    public SliderWidgetSetting ExtraHeight = new SliderWidgetSetting(2, -20, 60, "config.healthtags.extra_height");
     @Expose
     public Setting<HealthTagRenderer> SelectedRenderer = new Setting<>(HealthTagRenderer.HEART);
 
     /* === TargetManager settings === */
     @Expose
-    public SliderSetting TargetHoldTime = new SliderSetting(5, 1, 60, "config.healthtags.target_hold_time");
+    public SliderWidgetSetting TargetHoldTime = new SliderWidgetSetting(5, 1, 60, "config.healthtags.target_hold_time");
 
     public void save() {
         File configFile = FileUtils.getConfigFile("config");

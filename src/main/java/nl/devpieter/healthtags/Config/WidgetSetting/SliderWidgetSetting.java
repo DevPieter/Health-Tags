@@ -5,12 +5,12 @@ import nl.devpieter.healthtags.Config.Setting.ClampSetting;
 import nl.devpieter.healthtags.Screens.Widgets.SliderWidget;
 import org.jetbrains.annotations.NotNull;
 
-public class SliderSetting extends ClampSetting<Integer> implements WidgetSetting<SliderWidget> {
+public class SliderWidgetSetting extends ClampSetting<Integer> implements IWidgetSetting<SliderWidget> {
 
     @Expose
     private final String translationKey;
 
-    public SliderSetting(Integer value, Integer min, Integer max, String translationKey) {
+    public SliderWidgetSetting(Integer value, Integer min, Integer max, String translationKey) {
         super(value, min, max);
         this.translationKey = translationKey;
     }

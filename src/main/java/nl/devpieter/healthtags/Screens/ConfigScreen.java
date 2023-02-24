@@ -7,7 +7,7 @@ import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import nl.devpieter.healthtags.Config.Config;
 import nl.devpieter.healthtags.Config.Setting.Setting;
-import nl.devpieter.healthtags.Config.WidgetSetting.SliderSetting;
+import nl.devpieter.healthtags.Config.WidgetSetting.SliderWidgetSetting;
 import nl.devpieter.healthtags.Enums.HealthTagRenderer;
 import nl.devpieter.healthtags.Screens.Widgets.ItemToggleWidget;
 
@@ -60,7 +60,7 @@ public class ConfigScreen extends Screen {
             for (int i = 0; i < settings.size(); i++) {
                 Setting<?> setting = settings.get(i);
 
-                if (!(setting instanceof SliderSetting sliderSetting)) continue;
+                if (!(setting instanceof SliderWidgetSetting sliderSetting)) continue;
                 this.addDrawableChild(sliderSetting.getWidget(widgetLeft, (this.height / 2) - (settings.size() * 20) + (30 * i) + (140) / 2, widgetWidth, 20)).setFormat(this.wholeNumberFormat);
             }
         }
