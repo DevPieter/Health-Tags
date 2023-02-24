@@ -7,7 +7,7 @@ import net.minecraft.item.Items;
 import net.minecraft.text.Text;
 import nl.devpieter.healthtags.Config.Config;
 import nl.devpieter.healthtags.Config.Setting.Setting;
-import nl.devpieter.healthtags.Config.Setting.SliderSetting;
+import nl.devpieter.healthtags.Config.WidgetSetting.SliderSetting;
 import nl.devpieter.healthtags.Enums.HealthTagRenderer;
 import nl.devpieter.healthtags.Screens.Widgets.ItemToggleWidget;
 
@@ -41,11 +41,11 @@ public class ConfigScreen extends Screen {
         int widgetLeft = this.left + 10;
         int widgetWidth = (this.right - 10) - (widgetLeft);
 
-        this.addDrawableChild(new ItemToggleWidget(this.right / 2 - 48, 30, this.config.Enabled.get(), this.config.Enabled::set)).setItem(Items.NAME_TAG.getDefaultStack());
-        this.addDrawableChild(new ItemToggleWidget(this.right / 2 + 24, 30, this.config.ShowOnSelf.get(), this.config.ShowOnSelf::set)).setItem(Items.SPYGLASS.getDefaultStack());
+        this.addDrawableChild(new ItemToggleWidget(this.right / 2 - 48, 40, this.config.Enabled.get(), this.config.Enabled::set)).setItem(Items.NAME_TAG.getDefaultStack());
+        this.addDrawableChild(new ItemToggleWidget(this.right / 2 + 24, 40, this.config.ShowOnSelf.get(), this.config.ShowOnSelf::set)).setItem(Items.SPYGLASS.getDefaultStack());
 
-        this.addDrawableChild(this.config.ExtraHeight.getSliderWidget(widgetLeft, 80, widgetWidth)).setFormat(this.wholeNumberFormat);
-        this.addDrawableChild(this.config.TargetHoldTime.getSliderWidget(widgetLeft, 110, widgetWidth)).setFormat(this.wholeNumberFormat);
+        this.addDrawableChild(this.config.ExtraHeight.getWidget(widgetLeft, 80, widgetWidth, 20)).setFormat(this.wholeNumberFormat);
+        this.addDrawableChild(this.config.TargetHoldTime.getWidget(widgetLeft, 110, widgetWidth, 20)).setFormat(this.wholeNumberFormat);
 
         this.addDrawableChild(CyclingButtonWidget.builder(HealthTagRenderer::getName)
                 .values(HealthTagRenderer.values())
@@ -61,7 +61,7 @@ public class ConfigScreen extends Screen {
                 Setting<?> setting = settings.get(i);
 
                 if (!(setting instanceof SliderSetting sliderSetting)) continue;
-                this.addDrawableChild(sliderSetting.getSliderWidget(widgetLeft, (this.height / 2) - (settings.size() * 20) + (30 * i) + 40, widgetWidth)).setFormat(this.wholeNumberFormat);
+                this.addDrawableChild(sliderSetting.getWidget(widgetLeft, (this.height / 2) - (settings.size() * 20) + (30 * i) + (140) / 2, widgetWidth, 20)).setFormat(this.wholeNumberFormat);
             }
         }
     }

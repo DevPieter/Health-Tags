@@ -9,7 +9,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import nl.devpieter.healthtags.Config.Config;
 import nl.devpieter.healthtags.Config.Setting.Setting;
-import nl.devpieter.healthtags.Config.Setting.SliderSetting;
+import nl.devpieter.healthtags.Config.WidgetSetting.SliderSetting;
 import nl.devpieter.healthtags.Enums.HeartType;
 import org.jetbrains.annotations.NotNull;
 

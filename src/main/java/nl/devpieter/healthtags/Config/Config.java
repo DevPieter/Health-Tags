@@ -4,7 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 import nl.devpieter.healthtags.Config.Setting.Setting;
-import nl.devpieter.healthtags.Config.Setting.SliderSetting;
+import nl.devpieter.healthtags.Config.WidgetSetting.SliderSetting;
+import nl.devpieter.healthtags.Config.WidgetSetting.ToggleSetting;
 import nl.devpieter.healthtags.Enums.HealthTagRenderer;
 import nl.devpieter.healthtags.Utils.FileUtils;
 
@@ -21,9 +22,9 @@ public class Config {
 
     /* === Global settings === */
     @Expose
-    public Setting<Boolean> Enabled = new Setting<>(true);
+    public ToggleSetting Enabled = new ToggleSetting(true, "todo");
     @Expose
-    public Setting<Boolean> ShowOnSelf = new Setting<>(true);
+    public ToggleSetting ShowOnSelf = new ToggleSetting(true, "todo");
     @Expose
     public SliderSetting ExtraHeight = new SliderSetting(2, -20, 60, "config.healthtags.extra_height");
     @Expose
@@ -31,7 +32,7 @@ public class Config {
 
     /* === TargetManager settings === */
     @Expose
-    public SliderSetting TargetHoldTime = new SliderSetting(5, 0, 60, "config.healthtags.target_hold_time");
+    public SliderSetting TargetHoldTime = new SliderSetting(5, 1, 60, "config.healthtags.target_hold_time");
 
     public void save() {
         File configFile = FileUtils.getConfigFile("config");
