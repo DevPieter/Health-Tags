@@ -1,7 +1,7 @@
 package nl.devpieter.healthtags.Screens;
 
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import nl.devpieter.healthtags.Config.Setting.Setting;
 import nl.devpieter.healthtags.Config.WidgetSetting.SliderWidgetSetting;
@@ -16,9 +16,9 @@ public class RendererConfigScreen extends ConfigScreenBase {
     private final DecimalFormat wholeNumberFormat = new DecimalFormat("#");
     private final HealthTagRenderer renderer;
 
-    public RendererConfigScreen(HealthTagRenderer renderer) {
-        // TODO: Move to translation file
-        super(Text.translatable("Configuring '%s'", renderer.getName()));
+    protected RendererConfigScreen(HealthTagRenderer renderer, Screen parent) {
+        // TODO Translation
+        super(Text.translatable("Configuring '%s'", renderer.getName()), parent);
         this.renderer = renderer;
     }
 
@@ -28,7 +28,8 @@ public class RendererConfigScreen extends ConfigScreenBase {
 
         // TODO: Translation
         this.addDrawableChild(ButtonWidget.builder(Text.of("Back"), button -> this.close())
-                .dimensions(this.widgetLeft, this.bottom - 30, this.widgetWidth, 20).build());
+                .dimensions(this.widgetLeft, this.bottom - 30, this.widgetWidth, 20)
+                .build());
 
         IHealthTagRenderer tagRenderer = this.renderer.getRenderer();
         if (tagRenderer == null) return;
@@ -40,17 +41,5 @@ public class RendererConfigScreen extends ConfigScreenBase {
             if (!(setting instanceof SliderWidgetSetting sliderSetting)) continue;
             this.addDrawableChild(sliderSetting.getWidget(widgetLeft, 40 + (i * 30), widgetWidth, 20)).setFormat(this.wholeNumberFormat);
         }
-    }
-
-    @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        this.renderBackground(matrices);
-        super.render(matrices, mouseX, mouseY, delta);
-    }
-
-    @Override
-    public void close() {
-        if (this.client == null) return;
-        this.client.setScreen(new ConfigScreen());
     }
 }

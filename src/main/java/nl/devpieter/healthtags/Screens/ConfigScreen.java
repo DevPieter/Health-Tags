@@ -1,7 +1,6 @@
 package nl.devpieter.healthtags.Screens;
 
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import nl.devpieter.healthtags.Config.WidgetSetting.EnumWidgetSetting;
 import nl.devpieter.healthtags.Enums.HealthTagRenderer;
@@ -44,13 +43,7 @@ public class ConfigScreen extends ConfigScreenBase {
             IHealthTagRenderer tagRenderer = selectedRenderer.get().getRenderer();
             if (tagRenderer == null || tagRenderer.getSettings().isEmpty()) return;
 
-            this.client.setScreen(new RendererConfigScreen(selectedRenderer.get()));
+            this.client.setScreen(new RendererConfigScreen(selectedRenderer.get(), this));
         }).dimensions(this.widgetRight - buttonWidth + 30, this.bottom - 30, buttonWidth - 30, 20).build());
-    }
-
-    @Override
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        this.renderBackground(matrices);
-        super.render(matrices, mouseX, mouseY, delta);
     }
 }

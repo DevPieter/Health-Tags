@@ -11,6 +11,7 @@ import java.awt.*;
 public class ConfigScreenBase extends Screen {
 
     protected final Config config = Config.getInstance();
+    protected final Screen parent;
 
     protected final Color backgroundColor = new Color(47, 48, 55, 240);
     protected final Color titleColor = new Color(233, 164, 155);
@@ -20,7 +21,12 @@ public class ConfigScreenBase extends Screen {
     protected int widgetLeft, widgetRight, widgetWidth;
 
     protected ConfigScreenBase(Text title) {
+        this(title, null);
+    }
+
+    protected ConfigScreenBase(Text title, Screen parent) {
         super(title);
+        this.parent = parent;
     }
 
     @Override
@@ -39,8 +45,10 @@ public class ConfigScreenBase extends Screen {
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        drawCenteredText(matrices, this.textRenderer, this.title, this.right / 2, 10, this.titleColor.getRGB());
+        this.renderBackground(matrices);
         super.render(matrices, mouseX, mouseY, delta);
+        
+        drawCenteredText(matrices, this.textRenderer, this.title, this.right / 2, 10, this.titleColor.getRGB());
     }
 
     @Override
@@ -53,7 +61,8 @@ public class ConfigScreenBase extends Screen {
         this.config.save();
         HealthTagRenderer.saveAllSettings();
 
-        super.close();
+        if (this.client == null) return;
+        this.client.setScreen(this.parent);
     }
 
     @Override
