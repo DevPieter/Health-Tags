@@ -4,8 +4,13 @@
 
   "key.healthtags.open_config_screen": "Open config screen",
 
+  "config.healthtags.enabled.enabled": "Enabled",
+  "config.healthtags.enabled.disabled": "Disabled",
+  "config.healthtags.show_on_self": "Show on self",
+
   "config.healthtags.extra_height": "Extra height %s",
   "config.healthtags.target_hold_time": "Target hold time %s",
+
   "config.healthtags.hearts_in_row": "Hearts in row %s",
   "config.healthtags.hearts_spaced_by_x": "Hearts spaced by (X) %s",
   "config.healthtags.hearts_spaced_by_y": "Hearts spaced by (Y) %s",

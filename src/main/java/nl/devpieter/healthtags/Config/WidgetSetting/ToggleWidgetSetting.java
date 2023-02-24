@@ -1,17 +1,20 @@
 package nl.devpieter.healthtags.Config.WidgetSetting;
 
 import com.google.gson.annotations.Expose;
-import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.util.Identifier;
 import nl.devpieter.healthtags.Config.Setting.ToggleSetting;
 import nl.devpieter.healthtags.Screens.Widgets.ToggleWidget;
-import org.apache.commons.lang3.NotImplementedException;
 import org.jetbrains.annotations.NotNull;
 
 public class ToggleWidgetSetting extends ToggleSetting implements IWidgetSetting<ToggleWidget> {
 
     @Expose
     private final String enabledTranslationKey, disabledTranslationKey;
+
+    public ToggleWidgetSetting(Boolean value, String translationKey) {
+        super(value);
+        this.enabledTranslationKey = translationKey;
+        this.disabledTranslationKey = translationKey;
+    }
 
     public ToggleWidgetSetting(Boolean value, String enabledTranslationKey, String disabledTranslationKey) {
         super(value);

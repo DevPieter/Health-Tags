@@ -39,16 +39,15 @@ public class ConfigScreen extends Screen {
         this.bottom = this.height;
 
         int widgetLeft = this.left + 10;
+        int widgetRight = this.right - 10;
         int widgetWidth = (this.right - 10) - (widgetLeft);
 
-        /* Global Settings */
-//        this.addDrawableChild(new ToggleWidget(this.right / 2 - 48, 40, this.config.Enabled.get(), this.config.Enabled::set)).setItem(Items.NAME_TAG.getDefaultStack());
-//        this.addDrawableChild(new ToggleWidget(this.right / 2 + 24, 40, this.config.ShowOnSelf.get(), this.config.ShowOnSelf::set)).setItem(Items.SPYGLASS.getDefaultStack());
-        this.addDrawableChild(this.config.Enabled.getWidget(this.right / 3 - 48, 40, widgetWidth / 3, 20));
-        this.addDrawableChild(this.config.ShowOnSelf.getWidget(this.right / 2 + 24, 40, widgetWidth / 3, 20));
+        int buttonWidth = (widgetWidth / 2) - 5;
+        this.addDrawableChild(this.config.Enabled.getWidget(widgetLeft, 40, buttonWidth, 20));
+        this.addDrawableChild(this.config.ShowOnSelf.getWidget(widgetRight - buttonWidth, 40, buttonWidth, 20));
 
-        this.addDrawableChild(this.config.ExtraHeight.getWidget(widgetLeft, 80, widgetWidth, 20)).setFormat(this.wholeNumberFormat);
-        this.addDrawableChild(this.config.TargetHoldTime.getWidget(widgetLeft, 110, widgetWidth, 20)).setFormat(this.wholeNumberFormat);
+        this.addDrawableChild(this.config.ExtraHeight.getWidget(widgetLeft, 70, widgetWidth, 20)).setFormat(this.wholeNumberFormat);
+        this.addDrawableChild(this.config.TargetHoldTime.getWidget(widgetLeft, 100, widgetWidth, 20)).setFormat(this.wholeNumberFormat);
 
         EnumWidgetSetting<HealthTagRenderer> selectedRenderer = this.config.SelectedRenderer;
         selectedRenderer.setValues(HealthTagRenderer::getName, HealthTagRenderer.values());

@@ -22,9 +22,9 @@ public class Config {
 
     /* === Global settings === */
     @Expose
-    public ToggleWidgetSetting Enabled = new ToggleWidgetSetting(true, "todo 1", "todo 2");
+    public ToggleWidgetSetting Enabled = new ToggleWidgetSetting(true, "config.healthtags.enabled.enabled", "config.healthtags.enabled.disabled");
     @Expose
-    public ToggleWidgetSetting ShowOnSelf = new ToggleWidgetSetting(true, "todo 1", "todo 2");
+    public ToggleWidgetSetting ShowOnSelf = new ToggleWidgetSetting(true, "config.healthtags.show_on_self");
     @Expose
     public SliderWidgetSetting ExtraHeight = new SliderWidgetSetting(2, -20, 60, "config.healthtags.extra_height");
     @Expose
