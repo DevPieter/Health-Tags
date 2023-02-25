@@ -17,8 +17,7 @@ public class RendererConfigScreen extends ConfigScreenBase {
     private final HealthTagRenderer renderer;
 
     public RendererConfigScreen(HealthTagRenderer renderer, Screen parent) {
-        // TODO Translation
-        super(Text.translatable("Configuring '%s'", renderer.getName()), parent);
+        super(Text.translatable("healthtags.config.renderer_screen.title", renderer.getName()), parent);
         this.renderer = renderer;
     }
 
@@ -26,8 +25,7 @@ public class RendererConfigScreen extends ConfigScreenBase {
     protected void init() {
         super.init();
 
-        // TODO: Translation
-        this.addDrawableChild(ButtonWidget.builder(Text.of("Back"), button -> this.close())
+        this.addDrawableChild(ButtonWidget.builder(Text.translatable("healthtags.text.back"), button -> this.close())
                 .dimensions(this.widgetLeft, this.bottom - 30, this.widgetWidth, 20)
                 .build());
 

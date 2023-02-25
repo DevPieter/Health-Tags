@@ -13,9 +13,9 @@ import java.io.*;
 
 public enum HealthTagRenderer {
 
-    HEART("heart", HeartTagRenderer.class),
-    PERCENTAGE("percentage", PercentageTagRenderer.class),
-    NONE("none", null);
+    NONE("healthtags.renderer.none", null),
+    HEART("healthtags.renderer.heart", HeartTagRenderer.class),
+    PERCENTAGE("healthtags.renderer.percentage", PercentageTagRenderer.class);
 
     private final String translationKey;
     @Nullable
@@ -66,7 +66,7 @@ public enum HealthTagRenderer {
 
     /* === Getters === */
     public Text getName() {
-        return Text.translatable("renderer.healthtags." + this.translationKey);
+        return Text.translatable(this.translationKey);
     }
 
     @Nullable

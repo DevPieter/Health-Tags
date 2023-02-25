@@ -1,21 +1,30 @@
 {
-  "category.healthtags": "Health Tags",
-  "key.healthtags.toggle": "Toggle on/off",
+  "healthtags.category": "Health Tags",
 
-  "key.healthtags.open_config_screen": "Open config screen",
+  "healthtags.text.enabled": "Enabled",
+  "healthtags.text.disabled": "Disabled",
+  "healthtags.text.settings": "Settings",
+  "healthtags.text.back": "Back",
 
-  "config.healthtags.enabled.enabled": "Enabled",
-  "config.healthtags.enabled.disabled": "Disabled",
-  "config.healthtags.show_on_self": "Show on self",
+  "healthtags.toggle.key": "Toggle on/off",
 
-  "config.healthtags.extra_height": "Extra height %s",
-  "config.healthtags.target_hold_time": "Target hold time %s",
+  "healthtags.config.screen.key": "Open config",
+  "healthtags.config.screen.title": "Health Tags Config",
 
-  "config.healthtags.hearts_in_row": "Hearts in row %s",
-  "config.healthtags.hearts_spaced_by_x": "Hearts spaced by (X) %s",
-  "config.healthtags.hearts_spaced_by_y": "Hearts spaced by (Y) %s",
+  "healthtags.config.renderer_screen.key": "Open renderer config",
+  "healthtags.config.renderer_screen.title": "Configuring '%s'",
 
-  "renderer.healthtags.none": "None",
-  "renderer.healthtags.heart": "Hearts",
-  "renderer.healthtags.percentage": "Percentage"
+  "healthtags.config.setting.show_on_self": "Show on self",
+
+  "healthtags.config.setting.extra_height": "Extra height %s",
+  "healthtags.config.setting.target_hold_time": "Target hold time %s",
+
+  "healthtags.renderer.none": "None",
+
+  "healthtags.renderer.heart": "Hearts",
+  "healthtags.renderer.heart.setting.hearts_in_row": "Hearts in row %s",
+  "healthtags.renderer.heart.setting.hearts_spaced_by_x": "Hearts spaced by (X) %s",
+  "healthtags.renderer.heart.setting.hearts_spaced_by_y": "Hearts spaced by (Y) %s",
+
+  "healthtags.renderer.percentage": "Percentage"
 }

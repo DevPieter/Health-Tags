@@ -22,17 +22,17 @@ public class Config {
 
     /* === Global settings === */
     @Expose
-    public ToggleWidgetSetting Enabled = new ToggleWidgetSetting(true, "config.healthtags.enabled.enabled", "config.healthtags.enabled.disabled");
+    public ToggleWidgetSetting Enabled = new ToggleWidgetSetting(true, "healthtags.text.enabled", "healthtags.text.disabled");
     @Expose
-    public ToggleWidgetSetting ShowOnSelf = new ToggleWidgetSetting(true, "config.healthtags.show_on_self");
+    public ToggleWidgetSetting ShowOnSelf = new ToggleWidgetSetting(true, "healthtags.config.setting.show_on_self");
     @Expose
-    public SliderWidgetSetting ExtraHeight = new SliderWidgetSetting(2, -20, 60, "config.healthtags.extra_height");
+    public SliderWidgetSetting ExtraHeight = new SliderWidgetSetting(2, -20, 60, "healthtags.config.setting.extra_height");
     @Expose
     public EnumWidgetSetting<HealthTagRenderer> SelectedRenderer = new EnumWidgetSetting<>(HealthTagRenderer.HEART);
 
     /* === TargetManager settings === */
     @Expose
-    public SliderWidgetSetting TargetHoldTime = new SliderWidgetSetting(5, 1, 60, "config.healthtags.target_hold_time");
+    public SliderWidgetSetting TargetHoldTime = new SliderWidgetSetting(5, 1, 60, "healthtags.config.setting.target_hold_time");
 
     public void save() {
         File configFile = FileUtils.getConfigFile("config");

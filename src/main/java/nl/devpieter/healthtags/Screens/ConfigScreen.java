@@ -13,8 +13,7 @@ public class ConfigScreen extends ConfigScreenBase {
     private final DecimalFormat wholeNumberFormat = new DecimalFormat("#");
 
     public ConfigScreen() {
-        // TODO: Move to translation file
-        super(Text.of("Health Tags Config"));
+        super(Text.translatable("healthtags.config.screen.title"));
     }
 
     @Override
@@ -36,8 +35,7 @@ public class ConfigScreen extends ConfigScreenBase {
         this.addDrawableChild(selectedRenderer.getWidget(this.widgetLeft, this.bottom - 30, buttonWidth + 30, 20));
 
         // Edit Button
-        // TODO: Translation
-        this.addDrawableChild(ButtonWidget.builder(Text.of("Settings"), button -> {
+        this.addDrawableChild(ButtonWidget.builder(Text.translatable("healthtags.text.settings"), button -> {
             if (this.client == null) return;
 
             IHealthTagRenderer tagRenderer = selectedRenderer.get().getRenderer();

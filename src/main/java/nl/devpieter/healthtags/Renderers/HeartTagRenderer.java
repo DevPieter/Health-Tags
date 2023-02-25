@@ -21,11 +21,11 @@ public class HeartTagRenderer implements IHealthTagRenderer {
 
     /* === Settings === */
     @Expose
-    public final SliderWidgetSetting heartsInRow = new SliderWidgetSetting(10, 5, 25, "config.healthtags.hearts_in_row");
+    public final SliderWidgetSetting heartsInRow = new SliderWidgetSetting(10, 5, 25, "healthtags.renderer.heart.setting.hearts_in_row");
     @Expose
-    public final SliderWidgetSetting heartsSpacedBy_X = new SliderWidgetSetting(8, 6, 16, "config.healthtags.hearts_spaced_by_x");
+    public final SliderWidgetSetting heartsSpacedBy_X = new SliderWidgetSetting(8, 6, 16, "healthtags.renderer.heart.setting.hearts_spaced_by_x");
     @Expose
-    public final SliderWidgetSetting heartsSpacedBy_Y = new SliderWidgetSetting(10, 6, 16, "config.healthtags.hearts_spaced_by_y");
+    public final SliderWidgetSetting heartsSpacedBy_Y = new SliderWidgetSetting(10, 6, 16, "healthtags.renderer.heart.setting.hearts_spaced_by_y");
 
     @Override
     public @NotNull List<Setting<?>> getSettings() {
