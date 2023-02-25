@@ -7,6 +7,8 @@ import nl.devpieter.healthtags.Config.Setting.ClampSetting;
 import nl.devpieter.healthtags.Screens.Widgets.SliderWidget;
 import org.jetbrains.annotations.NotNull;
 
+import java.text.DecimalFormat;
+
 public class SliderWidgetSetting extends ClampSetting<Integer> implements IWidgetSetting<SliderWidget> {
 
     @Expose
@@ -27,6 +29,7 @@ public class SliderWidgetSetting extends ClampSetting<Integer> implements IWidge
         SliderWidget sliderWidget = new SliderWidget(x, y, width, this.translationKey);
         sliderWidget.setTooltip(Tooltip.of(Text.translatable(this.tooltipTranslationKey)));
         sliderWidget.setValues(this.get(), this.min(), this.max());
+        sliderWidget.setFormat(new DecimalFormat("#"));
         sliderWidget.setCallback(value -> this.set((int) Math.round(value)));
         return sliderWidget;
     }

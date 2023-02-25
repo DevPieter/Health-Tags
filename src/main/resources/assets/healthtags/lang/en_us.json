@@ -23,6 +23,8 @@
     "healthtags.config.setting.target_hold_time.tooltip": "TODO (target hold time)",
 
   "healthtags.renderer.none": "None",
+    "healthtags.renderer.none.tooltip": "TODO (none)",
+
 
   "healthtags.renderer.heart": "Hearts",
     "healthtags.renderer.heart.tooltip": "TODO (hearts)",
@@ -33,5 +35,6 @@
     "healthtags.renderer.heart.setting.hearts_spaced_by_y": "Hearts spaced by %s pixels (Y)",
       "healthtags.renderer.heart.setting.hearts_spaced_by_y.tooltip": "TODO (hearts spaced by Y)",
 
-  "healthtags.renderer.percentage": "Percentage"
+  "healthtags.renderer.percentage": "Percentage",
+    "healthtags.renderer.percentage.tooltip": "TODO (percentage)"
 }

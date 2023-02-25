@@ -4,16 +4,14 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
 import nl.devpieter.healthtags.Config.Setting.Setting;
-import nl.devpieter.healthtags.Config.WidgetSetting.SliderWidgetSetting;
+import nl.devpieter.healthtags.Config.WidgetSetting.IWidgetSetting;
 import nl.devpieter.healthtags.Enums.HealthTagRenderer;
 import nl.devpieter.healthtags.Renderers.IHealthTagRenderer;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class RendererConfigScreen extends ConfigScreenBase {
 
-    private final DecimalFormat wholeNumberFormat = new DecimalFormat("#");
     private final HealthTagRenderer renderer;
 
     public RendererConfigScreen(HealthTagRenderer renderer, Screen parent) {
@@ -25,19 +23,30 @@ public class RendererConfigScreen extends ConfigScreenBase {
     protected void init() {
         super.init();
 
+        // Back button
         this.addDrawableChild(ButtonWidget.builder(Text.translatable("healthtags.text.back"), button -> this.close())
                 .dimensions(this.widgetLeft, this.bottom - 30, this.widgetWidth, 20)
                 .build());
 
+        // Check if the health tag renderer is null or has no settings
         IHealthTagRenderer tagRenderer = this.renderer.getRenderer();
-        if (tagRenderer == null) return;
+        if (tagRenderer == null || tagRenderer.getSettings().isEmpty()) return;
 
-        List<Setting<?>> settings = this.renderer.getRenderer().getSettings();
-        for (int i = 0; i < settings.size(); i++) {
-            Setting<?> setting = settings.get(i);
+        // Get the settings from the renderer
+        List<Setting<?>> settings = tagRenderer.getSettings();
 
-            if (!(setting instanceof SliderWidgetSetting sliderSetting)) continue;
-            this.addDrawableChild(sliderSetting.getWidget(widgetLeft, 40 + (i * 30), widgetWidth, 20)).setFormat(this.wholeNumberFormat);
+        int totalHeight = 40 + (settings.size() * 30);
+        int allowedHeight = this.bottom - 60;
+
+        // TODO: Handle the settings that don't fit on the screen
+        List<Setting<?>> fitSettings = settings.subList(0, Math.min(settings.size(), allowedHeight / 30));
+
+        // Add the settings to the screen
+        for (int i = 0; i < fitSettings.size(); i++) {
+            if (40 + (i * 30) > allowedHeight) break;
+
+            if (!(fitSettings.get(i) instanceof IWidgetSetting<?> widgetSetting)) continue;
+            this.addDrawableChild(widgetSetting.getWidget(widgetLeft, 40 + (i * 30), widgetWidth, 20));
         }
     }
 }

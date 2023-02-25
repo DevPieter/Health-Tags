@@ -7,24 +7,26 @@ import net.minecraft.text.Text;
 import nl.devpieter.healthtags.Renderers.HeartTagRenderer;
 import nl.devpieter.healthtags.Renderers.IHealthTagRenderer;
 import nl.devpieter.healthtags.Renderers.PercentageTagRenderer;
+import nl.devpieter.healthtags.Renderers.TestSettingTagRenderer;
 import nl.devpieter.healthtags.Utils.FileUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
 
-public enum HealthTagRenderer {
+public enum HealthTagRenderer implements IWidgetableEnum {
 
     NONE("healthtags.renderer.none", null),
     HEART("healthtags.renderer.heart", HeartTagRenderer.class),
-    PERCENTAGE("healthtags.renderer.percentage", PercentageTagRenderer.class);
+    PERCENTAGE("healthtags.renderer.percentage", PercentageTagRenderer.class),
 
-    private final String translationKey, tooltipTranslationKey;
+    TEST("test", TestSettingTagRenderer.class);
+
+    private final String translationKey;
     @Nullable
     private final IHealthTagRenderer renderer;
 
     HealthTagRenderer(String translationKey, @Nullable Class<? extends IHealthTagRenderer> rendererClass) {
         this.translationKey = translationKey;
-        this.tooltipTranslationKey = translationKey + ".tooltip";
         this.renderer = this.createNewRenderer(rendererClass);
         this.saveSettings();
     }
@@ -66,13 +68,14 @@ public enum HealthTagRenderer {
         }
     }
 
-    /* === Getters === */
+    @Override
     public Text getName() {
         return Text.translatable(this.translationKey);
     }
 
+    @Override
     public Tooltip getTooltip() {
-        return Tooltip.of(Text.translatable(this.tooltipTranslationKey));
+        return Tooltip.of(Text.translatable(this.translationKey + ".tooltip"));
     }
 
     @Nullable
@@ -80,7 +83,6 @@ public enum HealthTagRenderer {
         return this.renderer;
     }
 
-    /* === Static methods === */
     public static void saveAllSettings() {
         for (HealthTagRenderer renderer : HealthTagRenderer.values()) renderer.saveSettings();
     }

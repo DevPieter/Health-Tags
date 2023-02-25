@@ -6,6 +6,5 @@ import net.minecraft.client.gui.Selectable;
 import org.jetbrains.annotations.NotNull;
 
 public interface IWidgetSetting<W extends Drawable & Element & Selectable> {
-
     @NotNull W getWidget(int x, int y, int width, int height);
 }
