@@ -1,16 +1,30 @@
 {
-  "category.healthtags": "Health Tags",
-  "key.healthtags.toggle": "Schakel aan/uit",
+  "healthtags.category": "Health Tags",
 
-  "key.healthtags.open_config_screen": "Open config screen",
+  "healthtags.text.enabled": "Ingeschakeld",
+  "healthtags.text.disabled": "Uitgeschakeld",
+  "healthtags.text.settings": "Instellingen",
+  "healthtags.text.back": "Terug",
 
-  "config.healthtags.extra_height": "Extra height %s",
-  "config.healthtags.target_hold_time": "Target hold time %s",
-  "config.healthtags.hearts_in_row": "Hearts in row %s",
-  "config.healthtags.hearts_spaced_by_x": "Hearts spaced by (X) %s",
-  "config.healthtags.hearts_spaced_by_y": "Hearts spaced by (Y) %s",
+  "healthtags.toggle.key": "Schakel aan/uit",
 
-  "renderer.healthtags.none": "Geen",
-  "renderer.healthtags.heart": "Hartjes",
-  "renderer.healthtags.percentage": "Percentage"
+  "healthtags.config.screen.key": "Configuratie openen",
+  "healthtags.config.screen.title": "Health Tags Configuratie",
+
+  "healthtags.config.renderer_screen.key": "Open renderer-configuratie",
+  "healthtags.config.renderer_screen.title": "'%s' configureren",
+
+  "healthtags.config.setting.show_on_self": "Show on self",
+
+  "healthtags.config.setting.extra_height": "Extra hoogte %s",
+  "healthtags.config.setting.target_hold_time": "Target hold time %s",
+
+  "healthtags.renderer.none": "Geen",
+
+  "healthtags.renderer.heart": "Hartjes",
+  "healthtags.renderer.heart.setting.hearts_in_row": "Hartjes in rij %s",
+  "healthtags.renderer.heart.setting.hearts_spaced_by_x": "Hearts spaced by (X) %s",
+  "healthtags.renderer.heart.setting.hearts_spaced_by_y": "Hearts spaced by (Y) %s",
+
+  "healthtags.renderer.percentage": "Percentage"
 }
