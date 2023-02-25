@@ -1,14 +1,17 @@
 package nl.devpieter.healthtags.Renderers;
 
 import com.google.gson.annotations.Expose;
+import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.text.Text;
 import nl.devpieter.healthtags.Config.Setting.Setting;
 import nl.devpieter.healthtags.Config.Setting.ToggleSetting;
 import nl.devpieter.healthtags.Config.WidgetSetting.EnumWidgetSetting;
 import nl.devpieter.healthtags.Config.WidgetSetting.SliderWidgetSetting;
 import nl.devpieter.healthtags.Config.WidgetSetting.ToggleWidgetSetting;
 import nl.devpieter.healthtags.Enums.HealthTagRenderer;
+import nl.devpieter.healthtags.Enums.IWidgetableEnum;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -23,16 +26,16 @@ public class TestSettingTagRenderer implements IHealthTagRenderer {
     public final SliderWidgetSetting TestSlider3 = new SliderWidgetSetting(10, -100, 100, "test slider 3 %s");
 
     @Expose
-    public final ToggleSetting TestToggle1 = new ToggleWidgetSetting(true, "test toggle 1");
+    public final ToggleWidgetSetting TestToggle1 = new ToggleWidgetSetting(true, "test toggle 1");
     @Expose
-    public final ToggleSetting TestToggle2 = new ToggleWidgetSetting(false, "test toggle 2");
+    public final ToggleWidgetSetting TestToggle2 = new ToggleWidgetSetting(false, "test toggle 2");
     @Expose
-    public final ToggleSetting TestToggle3 = new ToggleWidgetSetting(false, "test toggle 3");
+    public final ToggleWidgetSetting TestToggle3 = new ToggleWidgetSetting(false, "test toggle 3");
 
     @Expose
-    public final EnumWidgetSetting<HealthTagRenderer> TestEnum1 = new EnumWidgetSetting<>(HealthTagRenderer.NONE);
+    public final EnumWidgetSetting<MyTestEnum1> TestEnum1 = new EnumWidgetSetting<>(MyTestEnum1.Pro);
     @Expose
-    public final EnumWidgetSetting<HealthTagRenderer> TestEnum2 = new EnumWidgetSetting<>(HealthTagRenderer.PERCENTAGE);
+    public final EnumWidgetSetting<MyTestEnum2> TestEnum2 = new EnumWidgetSetting<>(MyTestEnum2.Dit);
 
     @Override
     public @NotNull List<Setting<?>> getSettings() {
@@ -42,5 +45,37 @@ public class TestSettingTagRenderer implements IHealthTagRenderer {
     @Override
     public void renderHealthTag(MatrixStack matrices, PlayerEntity player, boolean hasLabel, float tickDelta, int light) {
 
+    }
+
+    enum MyTestEnum1 implements IWidgetableEnum {
+        Epic,
+        Pro,
+        Gamer;
+
+        @Override
+        public Text getName() {
+            return Text.of(this.name());
+        }
+
+        @Override
+        public Tooltip getTooltip() {
+            return Tooltip.of(Text.of(this.name()));
+        }
+    }
+
+    enum MyTestEnum2 implements IWidgetableEnum {
+        Dit,
+        Is,
+        Test;
+
+        @Override
+        public Text getName() {
+            return Text.of(this.name());
+        }
+
+        @Override
+        public Tooltip getTooltip() {
+            return Tooltip.of(Text.of(this.name()));
+        }
     }
 }

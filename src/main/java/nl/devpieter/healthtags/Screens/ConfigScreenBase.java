@@ -62,7 +62,7 @@ public class ConfigScreenBase extends Screen {
         if (button != 0 || this.isMouseOver(mouseX, mouseY)) return false;
         this.close();
 
-        return false;
+        return true;
     }
 
     @Override
