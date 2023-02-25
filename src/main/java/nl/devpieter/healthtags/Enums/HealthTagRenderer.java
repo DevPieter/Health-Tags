@@ -2,6 +2,7 @@ package nl.devpieter.healthtags.Enums;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.text.Text;
 import nl.devpieter.healthtags.Renderers.HeartTagRenderer;
 import nl.devpieter.healthtags.Renderers.IHealthTagRenderer;
@@ -17,12 +18,13 @@ public enum HealthTagRenderer {
     HEART("healthtags.renderer.heart", HeartTagRenderer.class),
     PERCENTAGE("healthtags.renderer.percentage", PercentageTagRenderer.class);
 
-    private final String translationKey;
+    private final String translationKey, tooltipTranslationKey;
     @Nullable
     private final IHealthTagRenderer renderer;
 
     HealthTagRenderer(String translationKey, @Nullable Class<? extends IHealthTagRenderer> rendererClass) {
         this.translationKey = translationKey;
+        this.tooltipTranslationKey = translationKey + ".tooltip";
         this.renderer = this.createNewRenderer(rendererClass);
         this.saveSettings();
     }
@@ -67,6 +69,10 @@ public enum HealthTagRenderer {
     /* === Getters === */
     public Text getName() {
         return Text.translatable(this.translationKey);
+    }
+
+    public Tooltip getTooltip() {
+        return Tooltip.of(Text.translatable(this.tooltipTranslationKey));
     }
 
     @Nullable

@@ -22,7 +22,7 @@ public class Config {
 
     /* === Global settings === */
     @Expose
-    public ToggleWidgetSetting Enabled = new ToggleWidgetSetting(true, "healthtags.text.enabled", "healthtags.text.disabled");
+    public ToggleWidgetSetting Enabled = new ToggleWidgetSetting(true, "healthtags.text.enabled", "healthtags.text.disabled", "healthtags.config.setting.enabled.tooltip");
     @Expose
     public ToggleWidgetSetting ShowOnSelf = new ToggleWidgetSetting(true, "healthtags.config.setting.show_on_self");
     @Expose

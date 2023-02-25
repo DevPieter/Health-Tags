@@ -9,22 +9,29 @@
   "healthtags.toggle.key": "Toggle on/off",
 
   "healthtags.config.screen.key": "Open config",
-  "healthtags.config.screen.title": "Health Tags Config",
-
+    "healthtags.config.screen.title": "Health Tags Config",
   "healthtags.config.renderer_screen.key": "Open renderer config",
-  "healthtags.config.renderer_screen.title": "Configuring '%s'",
+    "healthtags.config.renderer_screen.title": "Configuring '%s'",
 
+  "healthtags.config.setting.enabled.tooltip": "TODO (enabled)",
   "healthtags.config.setting.show_on_self": "Show on self",
+    "healthtags.config.setting.show_on_self.tooltip": "TODO (show on self)",
 
-  "healthtags.config.setting.extra_height": "Extra height %s",
-  "healthtags.config.setting.target_hold_time": "Target hold time %s",
+  "healthtags.config.setting.extra_height": "%s pixels extra height",
+    "healthtags.config.setting.extra_height.tooltip": "TODO (extra height)",
+  "healthtags.config.setting.target_hold_time": "Hold target for %s seconds",
+    "healthtags.config.setting.target_hold_time.tooltip": "TODO (target hold time)",
 
   "healthtags.renderer.none": "None",
 
   "healthtags.renderer.heart": "Hearts",
-  "healthtags.renderer.heart.setting.hearts_in_row": "Hearts in row %s",
-  "healthtags.renderer.heart.setting.hearts_spaced_by_x": "Hearts spaced by (X) %s",
-  "healthtags.renderer.heart.setting.hearts_spaced_by_y": "Hearts spaced by (Y) %s",
+    "healthtags.renderer.heart.tooltip": "TODO (hearts)",
+    "healthtags.renderer.heart.setting.hearts_in_row": "%s hearts per row",
+      "healthtags.renderer.heart.setting.hearts_in_row.tooltip": "TODO (hearts in row)",
+    "healthtags.renderer.heart.setting.hearts_spaced_by_x": "Hearts spaced by %s pixels (X)",
+      "healthtags.renderer.heart.setting.hearts_spaced_by_x.tooltip": "TODO (hearts spaced by X)",
+    "healthtags.renderer.heart.setting.hearts_spaced_by_y": "Hearts spaced by %s pixels (Y)",
+      "healthtags.renderer.heart.setting.hearts_spaced_by_y.tooltip": "TODO (hearts spaced by Y)",
 
   "healthtags.renderer.percentage": "Percentage"
 }
