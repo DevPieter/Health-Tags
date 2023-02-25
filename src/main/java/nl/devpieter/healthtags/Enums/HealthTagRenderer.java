@@ -18,7 +18,6 @@ public enum HealthTagRenderer implements IWidgetableEnum {
     NONE("healthtags.renderer.none", null),
     HEART("healthtags.renderer.heart", HeartTagRenderer.class),
     PERCENTAGE("healthtags.renderer.percentage", PercentageTagRenderer.class),
-
     TEST("test", TestSettingTagRenderer.class);
 
     private final String translationKey;

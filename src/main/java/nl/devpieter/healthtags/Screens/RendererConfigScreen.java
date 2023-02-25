@@ -36,15 +36,13 @@ public class RendererConfigScreen extends ConfigScreenBase {
         List<Setting<?>> settings = tagRenderer.getSettings();
 
         int totalHeight = 40 + (settings.size() * 30);
-        int allowedHeight = this.bottom - 60;
+        int allowedHeight = this.bottom - 70;
 
         // TODO: Handle the settings that don't fit on the screen
         List<Setting<?>> fitSettings = settings.subList(0, Math.min(settings.size(), allowedHeight / 30));
 
         // Add the settings to the screen
         for (int i = 0; i < fitSettings.size(); i++) {
-            if (40 + (i * 30) > allowedHeight) break;
-
             if (!(fitSettings.get(i) instanceof IWidgetSetting<?> widgetSetting)) continue;
             this.addDrawableChild(widgetSetting.getWidget(widgetLeft, 40 + (i * 30), widgetWidth, 20));
         }

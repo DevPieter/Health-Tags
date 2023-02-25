@@ -47,13 +47,27 @@ public class ConfigScreenBase extends Screen {
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
         this.renderBackground(matrices);
         super.render(matrices, mouseX, mouseY, delta);
-        
+
         drawCenteredText(matrices, this.textRenderer, this.title, this.right / 2, 10, this.titleColor.getRGB());
     }
 
     @Override
     public void renderBackground(MatrixStack matrices) {
         fill(matrices, this.left, this.top, this.right, this.bottom, this.backgroundColor.getRGB());
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        if (!super.mouseClicked(mouseX, mouseY, button)) return false;
+        if (button != 0 || this.isMouseOver(mouseX, mouseY)) return false;
+        this.close();
+
+        return false;
+    }
+
+    @Override
+    public boolean isMouseOver(double mouseX, double mouseY) {
+        return mouseX >= this.left && mouseX <= this.right && mouseY >= this.top && mouseY <= this.bottom;
     }
 
     @Override
