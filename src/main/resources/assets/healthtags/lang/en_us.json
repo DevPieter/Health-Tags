@@ -25,7 +25,6 @@
   "healthtags.renderer.none": "None",
     "healthtags.renderer.none.tooltip": "TODO (none)",
 
-
   "healthtags.renderer.heart": "Hearts",
     "healthtags.renderer.heart.tooltip": "TODO (hearts)",
     "healthtags.renderer.heart.setting.hearts_in_row": "%s hearts per row",

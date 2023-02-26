@@ -28,7 +28,7 @@ public class RendererConfigScreen extends ConfigScreenBase {
                 .dimensions(this.widgetLeft, this.bottom - 30, this.widgetWidth, 20)
                 .build());
 
-        // Check if the health tag renderer is null or has no settings
+        // Return if the health tag renderer is null or has no settings
         IHealthTagRenderer tagRenderer = this.renderer.getRenderer();
         if (tagRenderer == null || tagRenderer.getSettings().isEmpty()) return;
 

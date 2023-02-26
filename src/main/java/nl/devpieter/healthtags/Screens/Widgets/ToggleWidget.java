@@ -7,7 +7,6 @@ import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
-import nl.devpieter.healthtags.Screens.Callbacks.ToggleCallback;
 
 import java.awt.*;
 
@@ -20,7 +19,7 @@ public class ToggleWidget extends ClickableWidget {
     private String enabledTranslationKey, disabledTranslationKey;
 
     private boolean toggled;
-    private ToggleCallback callback;
+    private ICallback<Boolean> callback;
 
     public ToggleWidget(int x, int y, int width, int height, boolean toggled) {
         super(x, y, width, height, Text.empty());
@@ -32,7 +31,7 @@ public class ToggleWidget extends ClickableWidget {
         this.disabledTranslationKey = disabledTranslationKey;
     }
 
-    public void setCallback(ToggleCallback callback) {
+    public void setCallback(ICallback<Boolean> callback) {
         this.callback = callback;
     }
 
@@ -64,7 +63,7 @@ public class ToggleWidget extends ClickableWidget {
         if (!super.mouseClicked(mouseX, mouseY, button)) return false;
 
         this.toggled = !this.toggled;
-        if (this.callback != null) this.callback.onToggle(this.toggled);
+        if (this.callback != null) this.callback.onCallback(this.toggled);
 
         return true;
     }
