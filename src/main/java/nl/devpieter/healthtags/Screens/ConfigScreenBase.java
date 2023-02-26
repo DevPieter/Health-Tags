@@ -58,7 +58,7 @@ public class ConfigScreenBase extends Screen {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (!super.mouseClicked(mouseX, mouseY, button)) return false;
+        if (super.mouseClicked(mouseX, mouseY, button)) return true;
         if (button != 0 || this.isMouseOver(mouseX, mouseY)) return false;
         this.close();
 

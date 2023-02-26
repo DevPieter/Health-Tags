@@ -35,13 +35,13 @@ public abstract class PlayerEntityRendererMixins extends LivingEntityRenderer<Ab
         // Don't render if the player is invisible to the client player
         if (player.isInvisibleTo(this.client.player)) return;
 
-        // Get the selected renderer
-        IHealthTagRenderer renderer = this.config.SelectedRenderer.get().getRenderer();
-        if (renderer == null) return;
-
         // Check if we should render the health tag
         boolean showOnSelf = this.config.ShowOnSelf.get() && player == this.client.player;
         if (!(this.targetManager.isTarget(player) || showOnSelf)) return;
+
+        // Get the selected renderer
+        IHealthTagRenderer renderer = this.config.SelectedRenderer.get().getRenderer();
+        if (renderer == null) return;
 
         // Render the health tag
         matrices.push();
