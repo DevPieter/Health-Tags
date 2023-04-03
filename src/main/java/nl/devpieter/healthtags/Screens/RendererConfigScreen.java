@@ -23,7 +23,7 @@ public class RendererConfigScreen extends ConfigScreenBase {
         this(renderer, parent, 0);
     }
 
-    public RendererConfigScreen(HealthTagRenderer renderer, Screen parent, int settingsPageIndex) {
+    private RendererConfigScreen(HealthTagRenderer renderer, Screen parent, int settingsPageIndex) {
         super(Text.translatable("healthtags.config.renderer_screen.title", renderer.getName()), parent);
         this.renderer = renderer;
         this.settingsPageIndex = settingsPageIndex;
