@@ -18,7 +18,7 @@ public class HealthTags implements ModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
             if (Keybindings.TOGGLE.wasPressed()) this.config.Enabled.toggle();
             if (Keybindings.OPEN_CONFIG_SCREEN.wasPressed()) client.setScreen(new ConfigScreen());
-            if (Keybindings.OPEN_RENDERER_CONFIG_SCREEN.wasPressed()) client.setScreen(new RendererConfigScreen(this.config.SelectedRenderer.get(), null));
+            if (Keybindings.OPEN_RENDERER_CONFIG_SCREEN.wasPressed()) client.setScreen(new RendererConfigScreen(this.config.SelectedRenderer.get()));
         });
     }
 }

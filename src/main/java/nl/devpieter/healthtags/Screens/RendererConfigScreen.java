@@ -13,10 +13,20 @@ import java.util.List;
 public class RendererConfigScreen extends ConfigScreenBase {
 
     private final HealthTagRenderer renderer;
+    private final int settingsPageIndex;
+
+    public RendererConfigScreen(HealthTagRenderer renderer) {
+        this(renderer, null, 0);
+    }
 
     public RendererConfigScreen(HealthTagRenderer renderer, Screen parent) {
+        this(renderer, parent, 0);
+    }
+
+    public RendererConfigScreen(HealthTagRenderer renderer, Screen parent, int settingsPageIndex) {
         super(Text.translatable("healthtags.config.renderer_screen.title", renderer.getName()), parent);
         this.renderer = renderer;
+        this.settingsPageIndex = settingsPageIndex;
     }
 
     @Override
