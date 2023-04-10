@@ -24,19 +24,19 @@ public class ConfigScreen extends ConfigScreenBase {
         super.init();
         int buttonWidth = (this.widgetWidth / 2) - 5;
 
-        // Enabled and ShowOnSelf buttons
+        // Enabled and ShowOnSelf buttons.
         this.addDrawableChild(this.config.Enabled.getWidget(this.widgetLeft, 40, buttonWidth, 20));
         this.addDrawableChild(this.config.ShowOnSelf.getWidget(this.widgetRight - buttonWidth, 40, buttonWidth, 20));
 
-        // Extra Height and Target Hold Time sliders
+        // Extra Height and Target Hold Time sliders.
         this.addDrawableChild(this.config.ExtraHeight.getWidget(this.widgetLeft, 70, this.widgetWidth, 20)).setFormat(this.wholeNumberFormat);
         this.addDrawableChild(this.config.TargetHoldTime.getWidget(this.widgetLeft, 100, this.widgetWidth, 20)).setFormat(this.wholeNumberFormat);
 
-        // Selected Renderer
+        // Selected Renderer.
         EnumWidgetSetting<HealthTagRenderer> selectedRenderer = this.config.SelectedRenderer;
         this.addDrawableChild(selectedRenderer.getWidget(this.widgetLeft, this.bottom - 30, buttonWidth + 30, 20));
 
-        // Edit Button
+        // Edit Button.
         this.editButton = this.addDrawableChild(ButtonWidget.builder(Text.translatable("healthtags.text.settings"), button -> {
             if (this.client == null) return;
             this.client.setScreen(new RendererConfigScreen(selectedRenderer.get(), this));

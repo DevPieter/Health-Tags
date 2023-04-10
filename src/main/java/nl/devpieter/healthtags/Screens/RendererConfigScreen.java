@@ -33,16 +33,16 @@ public class RendererConfigScreen extends ConfigScreenBase {
     protected void init() {
         super.init();
 
-        // Back button
+        // Back button.
         this.addDrawableChild(ButtonWidget.builder(Text.translatable("healthtags.text.back"), button -> this.close())
                 .dimensions(this.widgetLeft, this.bottom - 30, this.widgetWidth, 20)
                 .build());
 
-        // Return if the health tag renderer is null or has no settings
+        // Return if the health tag renderer is null or has no settings.
         IHealthTagRenderer tagRenderer = this.renderer.getRenderer();
         if (tagRenderer == null || tagRenderer.getSettings().isEmpty()) return;
 
-        // Get the settings from the renderer
+        // Get the settings from the renderer.
         List<Setting<?>> settings = tagRenderer.getSettings();
 
         int totalHeight = 40 + (settings.size() * 30);
@@ -51,7 +51,7 @@ public class RendererConfigScreen extends ConfigScreenBase {
         // TODO: Handle the settings that don't fit on the screen
         List<Setting<?>> fitSettings = settings.subList(0, Math.min(settings.size(), allowedHeight / 30));
 
-        // Add the settings to the screen
+        // Add the settings to the screen.
         for (int i = 0; i < fitSettings.size(); i++) {
             if (!(fitSettings.get(i) instanceof IWidgetSetting<?> widgetSetting)) continue;
             this.addDrawableChild(widgetSetting.getWidget(widgetLeft, 40 + (i * 30), widgetWidth, 20));

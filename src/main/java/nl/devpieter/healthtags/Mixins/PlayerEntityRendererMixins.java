@@ -29,21 +29,21 @@ public abstract class PlayerEntityRendererMixins extends LivingEntityRenderer<Ab
 
     @Inject(at = @At("TAIL"), method = "render(Lnet/minecraft/client/network/AbstractClientPlayerEntity;FFLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;I)V")
     public void render(AbstractClientPlayerEntity player, float yaw, float tickDelta, MatrixStack matrices, VertexConsumerProvider consumerProvider, int light, CallbackInfo ci) {
-        // Don't render if the mod is disabled
+        // Don't render if the mod is disabled.
         if (!config.Enabled.get()) return;
 
-        // Don't render if the player is invisible to the client player
+        // Don't render if the player is invisible to the client player.
         if (player.isInvisibleTo(this.client.player)) return;
 
-        // Check if we should render the health tag
+        // Check if we should render the health tag.
         boolean showOnSelf = this.config.ShowOnSelf.get() && player == this.client.player;
         if (!(this.targetManager.isTarget(player) || showOnSelf)) return;
 
-        // Get the selected renderer
+        // Get the selected renderer.
         IHealthTagRenderer renderer = this.config.SelectedRenderer.get().getRenderer();
         if (renderer == null) return;
 
-        // Render the health tag
+        // Render the health tag.
         matrices.push();
         matrices.translate(0.0, player.getHeight() + 0.5F, 0.0);
         matrices.multiply(this.dispatcher.getRotation());

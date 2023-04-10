@@ -23,13 +23,13 @@ public class ClientPlayerEntityMixin {
 
     @Inject(at = @At("HEAD"), method = "tick")
     public void tick(CallbackInfo ci) {
-        // Don't render if the mod is disabled
+        // Don't render if the mod is disabled.
         if (!config.Enabled.get()) return;
 
-        // Update the target manager
+        // Update the target manager.
         this.targetManager.update();
 
-        // Add the targeted entity to the target manager
+        // Add the targeted entity to the target manager.
         if (!(this.client.targetedEntity instanceof PlayerEntity player)) return;
         this.targetManager.addTarget(player);
     }

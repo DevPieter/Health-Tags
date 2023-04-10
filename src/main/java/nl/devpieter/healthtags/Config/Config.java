@@ -8,6 +8,7 @@ import nl.devpieter.healthtags.Config.WidgetSetting.SliderWidgetSetting;
 import nl.devpieter.healthtags.Config.WidgetSetting.ToggleWidgetSetting;
 import nl.devpieter.healthtags.Enums.HealthTagRenderer;
 import nl.devpieter.healthtags.Utils.FileUtils;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 
@@ -16,11 +17,15 @@ public class Config {
     /* INSTANCE */
     private static final Config INSTANCE = Config.createInstance();
 
+    /***
+     * Gets the instance of the config.
+     * @return The instance of the config.
+     */
     public static Config getInstance() {
         return INSTANCE;
     }
 
-    /* === Global settings === */
+    /* ========= Global settings ========= */
     @Expose
     public ToggleWidgetSetting Enabled = new ToggleWidgetSetting(true, "healthtags.text.enabled", "healthtags.text.disabled", "healthtags.config.setting.enabled.tooltip");
     @Expose
@@ -30,10 +35,13 @@ public class Config {
     @Expose
     public EnumWidgetSetting<HealthTagRenderer> SelectedRenderer = new EnumWidgetSetting<>(HealthTagRenderer.HEART);
 
-    /* === TargetManager settings === */
+    /* ========= TargetManager settings ========= */
     @Expose
     public SliderWidgetSetting TargetHoldTime = new SliderWidgetSetting(5, 1, 60, "healthtags.config.setting.target_hold_time");
 
+    /***
+     * Saves the config to the config file.
+     */
     public void save() {
         File configFile = FileUtils.getConfigFile("config");
         FileUtils.createFileIfNotExists(configFile);
@@ -46,7 +54,11 @@ public class Config {
         }
     }
 
-    private static Config createInstance() {
+    /***
+     * Loads the config from the config file.
+     * @return The loaded config.
+     */
+    private static @NotNull Config createInstance() {
         File configFile = FileUtils.getConfigFile("config");
         if (!configFile.exists()) return new Config();
 

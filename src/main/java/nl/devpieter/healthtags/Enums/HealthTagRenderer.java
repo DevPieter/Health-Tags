@@ -21,8 +21,7 @@ public enum HealthTagRenderer implements IWidgetableEnum {
     TEST("test", TestSettingTagRenderer.class);
 
     private final String translationKey;
-    @Nullable
-    private final IHealthTagRenderer renderer;
+    private final @Nullable IHealthTagRenderer renderer;
 
     HealthTagRenderer(String translationKey, @Nullable Class<? extends IHealthTagRenderer> rendererClass) {
         this.translationKey = translationKey;
@@ -30,10 +29,16 @@ public enum HealthTagRenderer implements IWidgetableEnum {
         this.saveSettings();
     }
 
-    private IHealthTagRenderer createNewRenderer(Class<? extends IHealthTagRenderer> rendererClass) {
+    /***
+     * Creates a new instance of the given renderer class and loads the settings from the config file.
+     * If the config file does not exist, a new instance is created and saved to the config file.
+     * @param rendererClass The class of the renderer to create.
+     * @return The new renderer instance.
+     */
+    private @Nullable IHealthTagRenderer createNewRenderer(Class<? extends IHealthTagRenderer> rendererClass) {
         if (rendererClass == null) return null;
 
-        File configFile = FileUtils.getRendererConfigFile(this.name().toLowerCase());
+        File configFile = FileUtils.getRendererConfigFile(this);
         FileUtils.createFileIfNotExists(configFile);
 
         try (Reader reader = new FileReader(configFile)) {
@@ -53,10 +58,13 @@ public enum HealthTagRenderer implements IWidgetableEnum {
         }
     }
 
+    /***
+     * Saves the settings of the renderer to the config file.
+     */
     public void saveSettings() {
         if (this.renderer == null) return;
 
-        File configFile = FileUtils.getRendererConfigFile(this.name().toLowerCase());
+        File configFile = FileUtils.getRendererConfigFile(this);
         FileUtils.createFileIfNotExists(configFile);
 
         try (Writer writer = new FileWriter(configFile)) {
@@ -67,21 +75,35 @@ public enum HealthTagRenderer implements IWidgetableEnum {
         }
     }
 
+    /***
+     * Gets the name of the renderer.
+     * @return The name of the renderer.
+     */
     @Override
     public Text getName() {
         return Text.translatable(this.translationKey);
     }
 
+    /***
+     * Gets the tooltip of the renderer.
+     * @return The tooltip of the renderer.
+     */
     @Override
     public Tooltip getTooltip() {
         return Tooltip.of(Text.translatable(this.translationKey + ".tooltip"));
     }
 
-    @Nullable
-    public IHealthTagRenderer getRenderer() {
+    /***
+     * Gets the renderer instance.
+     * @return The renderer instance.
+     */
+    public @Nullable IHealthTagRenderer getRenderer() {
         return this.renderer;
     }
 
+    /***
+     * Saves the settings of all renderers to their config files.
+     */
     public static void saveAllSettings() {
         for (HealthTagRenderer renderer : HealthTagRenderer.values()) renderer.saveSettings();
     }

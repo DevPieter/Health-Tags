@@ -7,6 +7,12 @@ public class ClampSetting<T extends Number & Comparable<T>> extends Setting<T> {
     @Expose
     private final T min, max;
 
+    /***
+     * Creates a new clamp setting with the given value, minimum and maximum.
+     * @param value The value of this setting.
+     * @param min The minimum value of this setting.
+     * @param max The maximum value of this setting.
+     */
     public ClampSetting(T value, T min, T max) {
         super(value);
         this.min = min;
@@ -21,11 +27,19 @@ public class ClampSetting<T extends Number & Comparable<T>> extends Setting<T> {
         return super.get();
     }
 
+    /***
+     * Gets the minimum value of this setting.
+     * @return The minimum value of this setting.
+     */
     public T min() {
-        return min;
+        return this.min;
     }
 
+    /***
+     * Gets the maximum value of this setting.
+     * @return The maximum value of this setting.
+     */
     public T max() {
-        return max;
+        return this.max;
     }
 }

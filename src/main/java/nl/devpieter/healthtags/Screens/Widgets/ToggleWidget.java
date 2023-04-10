@@ -26,35 +26,45 @@ public class ToggleWidget extends ClickableWidget {
         this.toggled = toggled;
     }
 
+    /***
+     * Sets the translation keys for the enabled and disabled state.
+     * @param enabledTranslationKey The translation key for the enabled state.
+     * @param disabledTranslationKey The translation key for the disabled state.
+     */
     public void setTranslationKeys(String enabledTranslationKey, String disabledTranslationKey) {
         this.enabledTranslationKey = enabledTranslationKey;
         this.disabledTranslationKey = disabledTranslationKey;
     }
 
+    /***
+     * Sets the callback for when the state is changed.
+     * @param callback The callback.
+     */
     public void setCallback(ICallback<Boolean> callback) {
         this.callback = callback;
     }
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        // Set the message
+        // Set the message.
         String translationKey = this.toggled ? this.enabledTranslationKey : this.disabledTranslationKey;
         this.setMessage(Text.translatable(translationKey));
 
+        // Render the button.
         super.render(matrices, mouseX, mouseY, delta);
     }
 
     @Override
     public void renderButton(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        // Set the texture
+        // Set the texture.
         RenderSystem.setShaderTexture(0, this.texture);
 
-        // Draw the button
+        // Draw the button.
         int imageV = (this.hovered ? 20 : 0) + (this.toggled ? 40 : 0);
         this.drawTexture(matrices, this.getX(), this.getY(), 0, imageV, this.width / 2, this.height);
         this.drawTexture(matrices, this.getX() + this.width / 2, this.getY(), 200 - this.width / 2, imageV, this.width / 2, this.height);
 
-        // Draw the text
+        // Draw the text.
         drawCenteredText(matrices, this.client.textRenderer, this.getMessage(), this.getX() + this.width / 2, this.getY() + (this.height - 8) / 2, this.color);
     }
 
@@ -70,6 +80,6 @@ public class ToggleWidget extends ClickableWidget {
 
     @Override
     protected void appendClickableNarrations(NarrationMessageBuilder builder) {
-
+        // TODO: Add narration.
     }
 }
