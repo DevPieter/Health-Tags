@@ -13,27 +13,27 @@
   "healthtags.config.renderer_screen.key": "Open renderer config",
     "healthtags.config.renderer_screen.title": "Configuring '%s'",
 
-  "healthtags.config.setting.enabled.tooltip": "TODO (enabled)",
+  "healthtags.config.setting.enabled.tooltip": "Enable or disable the rendering of health tags.",
   "healthtags.config.setting.show_on_self": "Show on self",
-    "healthtags.config.setting.show_on_self.tooltip": "TODO (show on self)",
+    "healthtags.config.setting.show_on_self.tooltip": "Render the health tag on yourself.",
 
   "healthtags.config.setting.extra_height": "%s pixels extra height",
-    "healthtags.config.setting.extra_height.tooltip": "TODO (extra height)",
+    "healthtags.config.setting.extra_height.tooltip": "Adds extra height above the player's name tag.",
   "healthtags.config.setting.target_hold_time": "Hold target for %s seconds",
-    "healthtags.config.setting.target_hold_time.tooltip": "TODO (target hold time)",
+    "healthtags.config.setting.target_hold_time.tooltip": "Keep rendering the health tag for an additional X seconds after the player has stopped looking at them.",
 
   "healthtags.renderer.none": "None",
-    "healthtags.renderer.none.tooltip": "TODO (none)",
+    "healthtags.renderer.none.tooltip": "Don't render any health tags.",
 
   "healthtags.renderer.heart": "Hearts",
-    "healthtags.renderer.heart.tooltip": "TODO (hearts)",
+    "healthtags.renderer.heart.tooltip": "Render the player's health as hearts.",
     "healthtags.renderer.heart.setting.hearts_in_row": "%s hearts per row",
-      "healthtags.renderer.heart.setting.hearts_in_row.tooltip": "TODO (hearts in row)",
+      "healthtags.renderer.heart.setting.hearts_in_row.tooltip": "The maximum number of hearts per row.",
     "healthtags.renderer.heart.setting.hearts_spaced_by_x": "Hearts spaced by %s pixels (X)",
-      "healthtags.renderer.heart.setting.hearts_spaced_by_x.tooltip": "TODO (hearts spaced by X)",
+      "healthtags.renderer.heart.setting.hearts_spaced_by_x.tooltip": "The number of pixels to space the hearts by on the X axis.",
     "healthtags.renderer.heart.setting.hearts_spaced_by_y": "Hearts spaced by %s pixels (Y)",
-      "healthtags.renderer.heart.setting.hearts_spaced_by_y.tooltip": "TODO (hearts spaced by Y)",
+      "healthtags.renderer.heart.setting.hearts_spaced_by_y.tooltip": "The number of pixels to space the hearts by on the Y axis.",
 
   "healthtags.renderer.percentage": "Percentage",
-    "healthtags.renderer.percentage.tooltip": "TODO (percentage)"
+    "healthtags.renderer.percentage.tooltip": "Render the player's health as a percentage."
 }
