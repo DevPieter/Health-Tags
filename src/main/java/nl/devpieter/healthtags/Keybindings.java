@@ -23,7 +23,7 @@ public class Keybindings {
      * @return The registered keybinding.
      */
     private static @NotNull KeyBinding register(@NotNull String translationKey, int code) {
-        LOGGER.debug("Registering keybinding with translation key: '{}' and code: {}", translationKey, code);
+        LOGGER.debug("Registering a keybinding with the translation key '{}' and the key code '{}'", translationKey, code);
 
         KeyBinding keyBinding = new KeyBinding(translationKey, InputUtil.Type.KEYSYM, code, "healthtags.category");
         return KeyBindingHelper.registerKeyBinding(keyBinding);
@@ -34,6 +34,6 @@ public class Keybindings {
      */
     public static void load() {
         // Some Java magic!
-        LOGGER.debug("Loading keybindings with some Java magic!");
+        LOGGER.debug("Loading the keybindings with some Java magic!");
     }
 }

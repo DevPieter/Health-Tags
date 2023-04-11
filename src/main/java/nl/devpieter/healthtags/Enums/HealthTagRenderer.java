@@ -2,6 +2,7 @@ package nl.devpieter.healthtags.Enums;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.text.Text;
 import nl.devpieter.healthtags.Renderers.HeartTagRenderer;
@@ -11,6 +12,7 @@ import nl.devpieter.healthtags.Renderers.TestSettingTagRenderer;
 import nl.devpieter.healthtags.Utils.FileUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
 
 import java.io.*;
 
@@ -42,18 +44,26 @@ public enum HealthTagRenderer implements IWidgetableEnum {
         File configFile = FileUtils.getRendererConfigFile(this);
         FileUtils.createFileIfNotExists(configFile);
 
+        Logger logger = LogUtils.getLogger();
+
         try (Reader reader = new FileReader(configFile)) {
             Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
             IHealthTagRenderer newRenderer = gson.fromJson(reader, rendererClass);
 
+            if (newRenderer == null) logger.warn("Failed to load the config for '{}', trying to create a new instance.", this.name());
+            else logger.info("Loaded the config for '{}'", this.name());
+
             return newRenderer == null ? rendererClass.getConstructor().newInstance() : newRenderer;
         } catch (Exception e) {
+            logger.error("Failed to load the config for '{}', trying to create a new instance.", this.name());
             e.printStackTrace();
         }
 
         try {
+            logger.info("Trying to create a new instance of '{}'", this.name());
             return rendererClass.getConstructor().newInstance();
         } catch (Exception e) {
+            logger.error("Failed to create a new instance of '{}'", this.name());
             e.printStackTrace();
             return null;
         }
@@ -68,10 +78,15 @@ public enum HealthTagRenderer implements IWidgetableEnum {
         File configFile = FileUtils.getRendererConfigFile(this);
         FileUtils.createFileIfNotExists(configFile);
 
+        Logger logger = LogUtils.getLogger();
+
         try (Writer writer = new FileWriter(configFile)) {
             Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
             gson.toJson(this.renderer, writer);
+
+            logger.info("Saved the config for '{}' to '{}'", this.name(), configFile.getAbsolutePath());
         } catch (Exception e) {
+            logger.error("Failed to save the config for '{}' to '{}'", this.name(), configFile.getAbsolutePath());
             e.printStackTrace();
         }
     }
@@ -106,6 +121,8 @@ public enum HealthTagRenderer implements IWidgetableEnum {
      * Saves the settings of all renderers to their config files.
      */
     public static void saveAllSettings() {
+        Logger logger = LogUtils.getLogger();
+        logger.info("Saving all the settings of the renderers...");
         for (HealthTagRenderer renderer : HealthTagRenderer.values()) renderer.saveSettings();
     }
 }

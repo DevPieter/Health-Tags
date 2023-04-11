@@ -56,9 +56,9 @@ public class Config {
             Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
             gson.toJson(this, writer);
 
-            this.logger.info("Saved config to: {}", configFile.getAbsolutePath());
+            this.logger.info("Saved the config to '{}'", configFile.getAbsolutePath());
         } catch (Exception e) {
-            this.logger.error("Failed to save config to: {}", configFile.getAbsolutePath());
+            this.logger.error("Failed to save the config to '{}'", configFile.getAbsolutePath());
             e.printStackTrace();
         }
     }
@@ -77,12 +77,12 @@ public class Config {
             Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
             Config config = gson.fromJson(reader, Config.class);
 
-            if (config == null) logger.warn("Failed to load config from: '{}', creating new config.", configFile.getAbsolutePath());
-            else logger.info("Loaded config from: {}", configFile.getAbsolutePath());
+            if (config == null) logger.warn("Failed to load the config from '{}', creating a new instance.", configFile.getAbsolutePath());
+            else logger.info("Loaded the config from '{}'", configFile.getAbsolutePath());
 
             return config == null ? new Config() : config;
         } catch (Exception e) {
-            logger.error("Failed to load config from: '{}', creating new config.", configFile.getAbsolutePath());
+            logger.error("Failed to load the config from '{}', creating a new instance.", configFile.getAbsolutePath());
             e.printStackTrace();
             return new Config();
         }
