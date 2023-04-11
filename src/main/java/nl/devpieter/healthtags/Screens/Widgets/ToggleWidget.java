@@ -80,6 +80,6 @@ public class ToggleWidget extends ClickableWidget {
 
     @Override
     protected void appendClickableNarrations(NarrationMessageBuilder builder) {
-        // TODO: Add narration.
+        this.appendDefaultNarrations(builder);
     }
 }
