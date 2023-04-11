@@ -1,11 +1,15 @@
 package nl.devpieter.healthtags.Utils;
 
+import com.mojang.logging.LogUtils;
 import nl.devpieter.healthtags.Enums.HealthTagRenderer;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 
 import java.io.File;
 
 public class FileUtils {
+
+    private static final Logger LOGGER = LogUtils.getLogger();
 
     /***
      * Gets the location of the config folder.
@@ -40,9 +44,13 @@ public class FileUtils {
     public static void createFileIfNotExists(@NotNull File file) {
         if (file.exists()) return;
         try {
-            file.getParentFile().mkdirs();
-            file.createNewFile();
+            boolean createdFolder = file.getParentFile().mkdirs();
+            boolean createdFile = file.createNewFile();
+
+            if (createdFolder) LOGGER.info("Created folder at: {}", file.getParentFile().getAbsolutePath());
+            if (createdFile) LOGGER.info("Created file at: {}", file.getAbsolutePath());
         } catch (Exception e) {
+            LOGGER.error("Failed to create file at: {}", file.getAbsolutePath());
             e.printStackTrace();
         }
     }

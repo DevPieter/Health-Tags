@@ -1,12 +1,16 @@
 package nl.devpieter.healthtags;
 
+import com.mojang.logging.LogUtils;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.glfw.GLFW;
+import org.slf4j.Logger;
 
 public class Keybindings {
+
+    private static final Logger LOGGER = LogUtils.getLogger();
 
     public static final KeyBinding TOGGLE = register("healthtags.toggle.key", GLFW.GLFW_KEY_H);
     public static final KeyBinding OPEN_CONFIG_SCREEN = register("healthtags.config.screen.key", GLFW.GLFW_KEY_C);
@@ -19,6 +23,8 @@ public class Keybindings {
      * @return The registered keybinding.
      */
     private static @NotNull KeyBinding register(@NotNull String translationKey, int code) {
+        LOGGER.debug("Registering keybinding with translation key: '{}' and code: {}", translationKey, code);
+
         KeyBinding keyBinding = new KeyBinding(translationKey, InputUtil.Type.KEYSYM, code, "healthtags.category");
         return KeyBindingHelper.registerKeyBinding(keyBinding);
     }
@@ -28,5 +34,6 @@ public class Keybindings {
      */
     public static void load() {
         // Some Java magic!
+        LOGGER.debug("Loading keybindings with some Java magic!");
     }
 }

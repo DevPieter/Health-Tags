@@ -1,8 +1,10 @@
 package nl.devpieter.healthtags;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.entity.player.PlayerEntity;
 import nl.devpieter.healthtags.Config.Config;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 
 import java.util.LinkedHashMap;
 
@@ -21,6 +23,7 @@ public class TargetManager {
 
     private final LinkedHashMap<PlayerEntity, Long> targets = new LinkedHashMap<>();
     private final Config config = Config.getInstance();
+    private final Logger logger = LogUtils.getLogger();
 
     /***
      * Adds a target to the list of targets.
@@ -29,6 +32,8 @@ public class TargetManager {
     public void addTarget(@NotNull PlayerEntity player) {
         if (this.targets.containsKey(player)) this.targets.replace(player, System.currentTimeMillis());
         else this.targets.put(player, System.currentTimeMillis());
+
+        this.logger.debug("Added / updated target: {}", player.getName().getString());
     }
 
 //    /***
