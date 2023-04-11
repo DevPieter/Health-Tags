@@ -43,6 +43,9 @@ public abstract class PlayerEntityRendererMixins extends LivingEntityRenderer<Ab
         IHealthTagRenderer renderer = this.config.SelectedRenderer.get().getRenderer();
         if (renderer == null) return;
 
+        // Check if the MatrixStack is null.
+        if (matrices == null) return;
+
         // Render the health tag.
         matrices.push();
         matrices.translate(0.0, player.getHeight() + 0.5F, 0.0);

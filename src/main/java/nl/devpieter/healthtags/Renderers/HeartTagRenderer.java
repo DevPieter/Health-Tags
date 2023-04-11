@@ -33,7 +33,7 @@ public class HeartTagRenderer implements IHealthTagRenderer {
     }
 
     @Override
-    public void renderHealthTag(MatrixStack matrices, PlayerEntity player, boolean hasLabel, float tickDelta, int light) {
+    public void renderHealthTag(@NotNull MatrixStack matrices, @NotNull PlayerEntity player, boolean hasLabel, float tickDelta, int light) {
         // Get the config values.
         int extraHeight = Config.getInstance().ExtraHeight.get();
         int heartsInRow = this.HeartsInRow.get();

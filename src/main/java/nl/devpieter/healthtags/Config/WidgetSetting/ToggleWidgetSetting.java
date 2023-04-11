@@ -10,22 +10,24 @@ import org.jetbrains.annotations.NotNull;
 public class ToggleWidgetSetting extends ToggleSetting implements IWidgetSetting<ToggleWidget> {
 
     @Expose
+    @NotNull
     private final String enabledTranslationKey, disabledTranslationKey;
     @Expose
+    @NotNull
     private final String tooltipTranslationKey;
 
-    public ToggleWidgetSetting(Boolean value, String translationKey) {
+    public ToggleWidgetSetting(@NotNull Boolean value, @NotNull String translationKey) {
         this(value, translationKey, translationKey, translationKey + ".tooltip");
     }
 
-    public ToggleWidgetSetting(Boolean value, String translationKey, String tooltipTranslationKey) {
+    public ToggleWidgetSetting(@NotNull Boolean value, @NotNull String translationKey, @NotNull String tooltipTranslationKey) {
         super(value);
         this.enabledTranslationKey = translationKey;
         this.disabledTranslationKey = translationKey;
         this.tooltipTranslationKey = tooltipTranslationKey;
     }
 
-    public ToggleWidgetSetting(Boolean value, String enabledTranslationKey, String disabledTranslationKey, String tooltipTranslationKey) {
+    public ToggleWidgetSetting(@NotNull Boolean value, @NotNull String enabledTranslationKey, @NotNull String disabledTranslationKey, @NotNull String tooltipTranslationKey) {
         super(value);
         this.enabledTranslationKey = enabledTranslationKey;
         this.disabledTranslationKey = disabledTranslationKey;

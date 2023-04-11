@@ -1,6 +1,7 @@
 package nl.devpieter.healthtags.Enums;
 
 import net.minecraft.entity.Entity;
+import org.jetbrains.annotations.NotNull;
 
 public enum HeartType {
     NORMAL(53), ABSORPTION(161), FROZEN(179);
@@ -25,7 +26,7 @@ public enum HeartType {
      * @param entity The entity to get the heart type of.
      * @return The heart type of the given entity.
      */
-    public static HeartType fromState(Entity entity) {
+    public static @NotNull HeartType fromState(@NotNull Entity entity) {
         return entity.isFrozen() ? FROZEN : NORMAL;
     }
 }

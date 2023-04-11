@@ -9,6 +9,7 @@ import nl.devpieter.healthtags.Renderers.IHealthTagRenderer;
 import nl.devpieter.healthtags.Renderers.PercentageTagRenderer;
 import nl.devpieter.healthtags.Renderers.TestSettingTagRenderer;
 import nl.devpieter.healthtags.Utils.FileUtils;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.*;
@@ -20,10 +21,10 @@ public enum HealthTagRenderer implements IWidgetableEnum {
     PERCENTAGE("healthtags.renderer.percentage", PercentageTagRenderer.class),
     TEST("test", TestSettingTagRenderer.class);
 
-    private final String translationKey;
+    private final @NotNull String translationKey;
     private final @Nullable IHealthTagRenderer renderer;
 
-    HealthTagRenderer(String translationKey, @Nullable Class<? extends IHealthTagRenderer> rendererClass) {
+    HealthTagRenderer(@NotNull String translationKey, @Nullable Class<? extends IHealthTagRenderer> rendererClass) {
         this.translationKey = translationKey;
         this.renderer = this.createNewRenderer(rendererClass);
         this.saveSettings();
@@ -35,7 +36,7 @@ public enum HealthTagRenderer implements IWidgetableEnum {
      * @param rendererClass The class of the renderer to create.
      * @return The new renderer instance.
      */
-    private @Nullable IHealthTagRenderer createNewRenderer(Class<? extends IHealthTagRenderer> rendererClass) {
+    private @Nullable IHealthTagRenderer createNewRenderer(@Nullable Class<? extends IHealthTagRenderer> rendererClass) {
         if (rendererClass == null) return null;
 
         File configFile = FileUtils.getRendererConfigFile(this);
@@ -80,7 +81,7 @@ public enum HealthTagRenderer implements IWidgetableEnum {
      * @return The name of the renderer.
      */
     @Override
-    public Text getName() {
+    public @NotNull Text getName() {
         return Text.translatable(this.translationKey);
     }
 
@@ -89,7 +90,7 @@ public enum HealthTagRenderer implements IWidgetableEnum {
      * @return The tooltip of the renderer.
      */
     @Override
-    public Tooltip getTooltip() {
+    public @NotNull Tooltip getTooltip() {
         return Tooltip.of(Text.translatable(this.translationKey + ".tooltip"));
     }
 

@@ -9,6 +9,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 import nl.devpieter.healthtags.Config.Config;
 import nl.devpieter.healthtags.Enums.HeartType;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
@@ -17,7 +18,7 @@ public class PercentageTagRenderer implements IHealthTagRenderer {
     private final Identifier icons = new Identifier("textures/gui/icons.png");
 
     @Override
-    public void renderHealthTag(MatrixStack matrices, PlayerEntity player, boolean hasLabel, float tickDelta, int light) {
+    public void renderHealthTag(@NotNull MatrixStack matrices, @NotNull PlayerEntity player, boolean hasLabel, float tickDelta, int light) {
         // Get the config values.
         int extraHeight = Config.getInstance().ExtraHeight.get();
 

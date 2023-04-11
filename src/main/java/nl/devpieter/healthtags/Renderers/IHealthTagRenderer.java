@@ -25,5 +25,5 @@ public interface IHealthTagRenderer {
      * @param tickDelta The tick delta.
      * @param light The light level.
      */
-    void renderHealthTag(MatrixStack matrices, PlayerEntity player, boolean hasLabel, float tickDelta, int light);
+    void renderHealthTag(@NotNull MatrixStack matrices, @NotNull PlayerEntity player, boolean hasLabel, float tickDelta, int light);
 }

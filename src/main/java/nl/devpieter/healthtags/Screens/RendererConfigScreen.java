@@ -7,23 +7,25 @@ import nl.devpieter.healthtags.Config.Setting.Setting;
 import nl.devpieter.healthtags.Config.WidgetSetting.IWidgetSetting;
 import nl.devpieter.healthtags.Enums.HealthTagRenderer;
 import nl.devpieter.healthtags.Renderers.IHealthTagRenderer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class RendererConfigScreen extends ConfigScreenBase {
 
-    private final HealthTagRenderer renderer;
+    private final @NotNull HealthTagRenderer renderer;
     private final int settingsPageIndex;
 
-    public RendererConfigScreen(HealthTagRenderer renderer) {
+    public RendererConfigScreen(@NotNull HealthTagRenderer renderer) {
         this(renderer, null, 0);
     }
 
-    public RendererConfigScreen(HealthTagRenderer renderer, Screen parent) {
+    public RendererConfigScreen(@NotNull HealthTagRenderer renderer, @Nullable Screen parent) {
         this(renderer, parent, 0);
     }
 
-    private RendererConfigScreen(HealthTagRenderer renderer, Screen parent, int settingsPageIndex) {
+    private RendererConfigScreen(@NotNull HealthTagRenderer renderer, @Nullable Screen parent, int settingsPageIndex) {
         super(Text.translatable("healthtags.config.renderer_screen.title", renderer.getName()), parent);
         this.renderer = renderer;
         this.settingsPageIndex = settingsPageIndex;

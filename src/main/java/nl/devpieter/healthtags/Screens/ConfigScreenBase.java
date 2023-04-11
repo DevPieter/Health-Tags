@@ -5,6 +5,8 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import nl.devpieter.healthtags.Config.Config;
 import nl.devpieter.healthtags.Enums.HealthTagRenderer;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 
@@ -12,7 +14,7 @@ public class ConfigScreenBase extends Screen {
 
     /* ===== Variables ===== */
     protected final Config config = Config.getInstance();
-    protected final Screen parent;
+    protected final @Nullable Screen parent;
 
     /* ===== Colors ===== */
     protected final Color backgroundColor = new Color(47, 48, 55, 240);
@@ -23,11 +25,11 @@ public class ConfigScreenBase extends Screen {
     protected int left, right, top, bottom;
     protected int widgetLeft, widgetRight, widgetWidth;
 
-    protected ConfigScreenBase(Text title) {
+    protected ConfigScreenBase(@NotNull Text title) {
         this(title, null);
     }
 
-    protected ConfigScreenBase(Text title, Screen parent) {
+    protected ConfigScreenBase(@NotNull Text title, @Nullable Screen parent) {
         super(title);
         this.parent = parent;
     }

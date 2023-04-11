@@ -15,13 +15,13 @@ import java.io.*;
 public class Config {
 
     /* INSTANCE */
-    private static final Config INSTANCE = Config.createInstance();
+    private static final @NotNull Config INSTANCE = Config.createInstance();
 
     /***
      * Gets the instance of the config.
      * @return The instance of the config.
      */
-    public static Config getInstance() {
+    public static @NotNull Config getInstance() {
         return INSTANCE;
     }
 

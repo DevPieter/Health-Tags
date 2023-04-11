@@ -10,7 +10,7 @@ import java.util.function.Function;
 
 public class EnumWidgetSetting<T extends Enum<T> & IWidgetableEnum> extends Setting<T> implements IWidgetSetting<CyclingButtonWidget<T>> {
 
-    public EnumWidgetSetting(T value) {
+    public EnumWidgetSetting(@NotNull T value) {
         super(value);
     }
 

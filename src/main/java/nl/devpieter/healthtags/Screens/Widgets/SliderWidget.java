@@ -2,6 +2,8 @@ package nl.devpieter.healthtags.Screens.Widgets;
 
 import net.minecraft.text.Text;
 import net.minecraft.util.math.MathHelper;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.text.DecimalFormat;
 
@@ -10,9 +12,9 @@ public class SliderWidget extends net.minecraft.client.gui.widget.SliderWidget {
     private final String translationKey;
     private DecimalFormat format = new DecimalFormat("#.##");
     private double min, max;
-    private ICallback<Double> callback;
+    private @Nullable ICallback<Double> callback;
 
-    public SliderWidget(int x, int y, int width, String translationKey) {
+    public SliderWidget(int x, int y, int width, @NotNull String translationKey) {
         super(x, y, width, 20, Text.empty(), 0);
         this.translationKey = translationKey;
     }
@@ -21,7 +23,7 @@ public class SliderWidget extends net.minecraft.client.gui.widget.SliderWidget {
      * Sets the decimal format for the value.
      * @param format The decimal format.
      */
-    public void setFormat(DecimalFormat format) {
+    public void setFormat(@NotNull DecimalFormat format) {
         this.format = format;
     }
 
@@ -41,7 +43,7 @@ public class SliderWidget extends net.minecraft.client.gui.widget.SliderWidget {
      * Sets the callback for when the value is changed.
      * @param callback The callback.
      */
-    public void setCallback(ICallback<Double> callback) {
+    public void setCallback(@Nullable ICallback<Double> callback) {
         this.callback = callback;
     }
 

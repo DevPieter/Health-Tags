@@ -1,10 +1,12 @@
 package nl.devpieter.healthtags.Config.Setting;
 
 import com.google.gson.annotations.Expose;
+import org.jetbrains.annotations.NotNull;
 
 public class ClampSetting<T extends Number & Comparable<T>> extends Setting<T> {
 
     @Expose
+    @NotNull
     private final T min, max;
 
     /***
@@ -13,14 +15,14 @@ public class ClampSetting<T extends Number & Comparable<T>> extends Setting<T> {
      * @param min The minimum value of this setting.
      * @param max The maximum value of this setting.
      */
-    public ClampSetting(T value, T min, T max) {
+    public ClampSetting(@NotNull T value, @NotNull T min, @NotNull T max) {
         super(value);
         this.min = min;
         this.max = max;
     }
 
     @Override
-    public T get() {
+    public @NotNull T get() {
         double value = super.get().doubleValue();
         if (value < this.min.doubleValue()) return this.min;
         if (value > this.max.doubleValue()) return this.max;
@@ -31,7 +33,7 @@ public class ClampSetting<T extends Number & Comparable<T>> extends Setting<T> {
      * Gets the minimum value of this setting.
      * @return The minimum value of this setting.
      */
-    public T min() {
+    public @NotNull T min() {
         return this.min;
     }
 
@@ -39,7 +41,7 @@ public class ClampSetting<T extends Number & Comparable<T>> extends Setting<T> {
      * Gets the maximum value of this setting.
      * @return The maximum value of this setting.
      */
-    public T max() {
+    public @NotNull T max() {
         return this.max;
     }
 }

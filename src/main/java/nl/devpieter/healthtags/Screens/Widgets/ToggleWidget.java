@@ -7,6 +7,8 @@ import net.minecraft.client.gui.widget.ClickableWidget;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 
@@ -19,7 +21,7 @@ public class ToggleWidget extends ClickableWidget {
     private String enabledTranslationKey, disabledTranslationKey;
 
     private boolean toggled;
-    private ICallback<Boolean> callback;
+    private @Nullable ICallback<Boolean> callback;
 
     public ToggleWidget(int x, int y, int width, int height, boolean toggled) {
         super(x, y, width, height, Text.empty());
@@ -31,7 +33,7 @@ public class ToggleWidget extends ClickableWidget {
      * @param enabledTranslationKey The translation key for the enabled state.
      * @param disabledTranslationKey The translation key for the disabled state.
      */
-    public void setTranslationKeys(String enabledTranslationKey, String disabledTranslationKey) {
+    public void setTranslationKeys(@NotNull String enabledTranslationKey, @NotNull String disabledTranslationKey) {
         this.enabledTranslationKey = enabledTranslationKey;
         this.disabledTranslationKey = disabledTranslationKey;
     }
@@ -40,7 +42,7 @@ public class ToggleWidget extends ClickableWidget {
      * Sets the callback for when the state is changed.
      * @param callback The callback.
      */
-    public void setCallback(ICallback<Boolean> callback) {
+    public void setCallback(@Nullable ICallback<Boolean> callback) {
         this.callback = callback;
     }
 

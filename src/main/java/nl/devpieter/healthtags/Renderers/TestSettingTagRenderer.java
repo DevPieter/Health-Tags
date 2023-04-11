@@ -43,7 +43,7 @@ public class TestSettingTagRenderer implements IHealthTagRenderer {
     }
 
     @Override
-    public void renderHealthTag(MatrixStack matrices, PlayerEntity player, boolean hasLabel, float tickDelta, int light) {
+    public void renderHealthTag(@NotNull MatrixStack matrices, @NotNull PlayerEntity player, boolean hasLabel, float tickDelta, int light) {
 
     }
 
@@ -53,12 +53,12 @@ public class TestSettingTagRenderer implements IHealthTagRenderer {
         Gamer;
 
         @Override
-        public Text getName() {
+        public @NotNull Text getName() {
             return Text.of(this.name());
         }
 
         @Override
-        public Tooltip getTooltip() {
+        public @NotNull Tooltip getTooltip() {
             return Tooltip.of(Text.of(this.name()));
         }
     }
@@ -69,12 +69,12 @@ public class TestSettingTagRenderer implements IHealthTagRenderer {
         Test;
 
         @Override
-        public Text getName() {
+        public @NotNull Text getName() {
             return Text.of(this.name());
         }
 
         @Override
-        public Tooltip getTooltip() {
+        public @NotNull Tooltip getTooltip() {
             return Tooltip.of(Text.of(this.name()));
         }
     }
