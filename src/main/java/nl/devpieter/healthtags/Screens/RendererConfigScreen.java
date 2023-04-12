@@ -55,11 +55,11 @@ public class RendererConfigScreen extends ConfigScreenBase {
         // Get the settings from the renderer.
         List<Setting<?>> settings = tagRenderer.getSettings();
 
-        int totalHeight = 40 + (settings.size() * 30);
-        int allowedHeight = this.bottom - 70;
+        int allowedHeight = this.bottom - 90;
+        int buttonHeight = 20 + 10;
 
         // TODO: Handle the settings that don't fit on the screen
-        List<Setting<?>> fitSettings = settings.subList(0, Math.min(settings.size(), allowedHeight / 30));
+        List<Setting<?>> fitSettings = settings.subList(this.settingsPageIndex * (allowedHeight / buttonHeight), Math.min(settings.size(), (this.settingsPageIndex + 1) * (allowedHeight / buttonHeight)));
 
         // Add the settings to the screen.
         for (int i = 0; i < fitSettings.size(); i++) {
