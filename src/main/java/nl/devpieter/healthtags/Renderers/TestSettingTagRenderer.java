@@ -14,6 +14,7 @@ import nl.devpieter.healthtags.Enums.HealthTagRenderer;
 import nl.devpieter.healthtags.Enums.IWidgetableEnum;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TestSettingTagRenderer implements IHealthTagRenderer {
@@ -24,6 +25,10 @@ public class TestSettingTagRenderer implements IHealthTagRenderer {
     public final SliderWidgetSetting TestSlider2 = new SliderWidgetSetting(10, -20, 20, "test slider 2 %s");
     @Expose
     public final SliderWidgetSetting TestSlider3 = new SliderWidgetSetting(10, -100, 100, "test slider 3 %s");
+    @Expose
+    public final SliderWidgetSetting TestSlider4 = new SliderWidgetSetting(10, -100, 100, "test slider 4 %s");
+    @Expose
+    public final SliderWidgetSetting TestSlider5 = new SliderWidgetSetting(10, -100, 100, "test slider 5 %s");
 
     @Expose
     public final ToggleWidgetSetting TestToggle1 = new ToggleWidgetSetting(true, "test toggle 1");
@@ -31,15 +36,31 @@ public class TestSettingTagRenderer implements IHealthTagRenderer {
     public final ToggleWidgetSetting TestToggle2 = new ToggleWidgetSetting(false, "test toggle 2");
     @Expose
     public final ToggleWidgetSetting TestToggle3 = new ToggleWidgetSetting(false, "test toggle 3");
+    @Expose
+    public final ToggleWidgetSetting TestToggle4 = new ToggleWidgetSetting(false, "test toggle 4");
+    @Expose
+    public final ToggleWidgetSetting TestToggle5 = new ToggleWidgetSetting(false, "test toggle 5");
 
     @Expose
-    public final EnumWidgetSetting<MyTestEnum1> TestEnum1 = new EnumWidgetSetting<>(MyTestEnum1.Pro);
+    public final EnumWidgetSetting<MyTestEnum2> TestEnum1 = new EnumWidgetSetting<>(MyTestEnum2.Dit);
     @Expose
-    public final EnumWidgetSetting<MyTestEnum2> TestEnum2 = new EnumWidgetSetting<>(MyTestEnum2.Dit);
+    public final EnumWidgetSetting<MyTestEnum2> TestEnum2 = new EnumWidgetSetting<>(MyTestEnum2.Is);
+    @Expose
+    public final EnumWidgetSetting<MyTestEnum1> TestEnum3 = new EnumWidgetSetting<>(MyTestEnum1.Pro);
+    @Expose
+    public final EnumWidgetSetting<MyTestEnum1> TestEnum4 = new EnumWidgetSetting<>(MyTestEnum1.Gamer);
+    @Expose
+    public final EnumWidgetSetting<MyTestEnum2> TestEnum5 = new EnumWidgetSetting<>(MyTestEnum2.Test);
 
     @Override
     public @NotNull List<Setting<?>> getSettings() {
-        return List.of(TestSlider1, TestSlider2, TestSlider3, TestToggle1, TestToggle2, TestToggle3, TestEnum1, TestEnum2);
+        List<Setting<?>> settings = new ArrayList<>();
+
+        settings.addAll(List.of(TestSlider1, TestSlider2, TestSlider3, TestSlider4, TestSlider5));
+        settings.addAll(List.of(TestToggle1, TestToggle2, TestToggle3, TestToggle4, TestToggle5));
+        settings.addAll(List.of(TestEnum1, TestEnum2, TestEnum3, TestEnum4, TestEnum5));
+
+        return settings;
     }
 
     @Override
