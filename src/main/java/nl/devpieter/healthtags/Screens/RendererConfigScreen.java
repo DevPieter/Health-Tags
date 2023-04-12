@@ -35,10 +35,18 @@ public class RendererConfigScreen extends ConfigScreenBase {
     protected void init() {
         super.init();
 
+        // Left button.
+        this.addDrawableChild(ButtonWidget.builder(Text.of("left"), button -> System.out.println("left"))
+                .dimensions(10, 20, 75, 20).build());
+
         // Back button.
         this.addDrawableChild(ButtonWidget.builder(Text.translatable("healthtags.text.back"), button -> this.close())
                 .dimensions(this.widgetLeft, this.bottom - 30, this.widgetWidth, 20)
                 .build());
+
+        // Right button.
+        this.addDrawableChild(ButtonWidget.builder(Text.of("right"), button -> System.out.println("right"))
+                .dimensions(10, 60, 75, 20).build());
 
         // Return if the health tag renderer is null or has no settings.
         IHealthTagRenderer tagRenderer = this.renderer.getRenderer();
