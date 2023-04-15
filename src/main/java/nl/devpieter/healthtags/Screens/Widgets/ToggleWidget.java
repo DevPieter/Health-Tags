@@ -17,7 +17,7 @@ public class ToggleWidget extends ClickableWidget {
     private final MinecraftClient client = MinecraftClient.getInstance();
 
     private final Identifier texture = new Identifier("healthtags", "textures/gui/toggle_widget.png");
-    private final int color = Color.WHITE.getRGB();
+//    private final int color = Color.WHITE.getRGB();
     private String enabledTranslationKey, disabledTranslationKey;
 
     private boolean toggled;
@@ -67,7 +67,7 @@ public class ToggleWidget extends ClickableWidget {
         this.drawTexture(matrices, this.getX() + this.width / 2, this.getY(), 200 - this.width / 2, imageV, this.width / 2, this.height);
 
         // Draw the text.
-        drawCenteredText(matrices, this.client.textRenderer, this.getMessage(), this.getX() + this.width / 2, this.getY() + (this.height - 8) / 2, this.color);
+        drawCenteredText(matrices, this.client.textRenderer, this.getMessage(), this.getX() + this.width / 2, this.getY() + (this.height - 8) / 2, 0xFFFFFF);
     }
 
     @Override
