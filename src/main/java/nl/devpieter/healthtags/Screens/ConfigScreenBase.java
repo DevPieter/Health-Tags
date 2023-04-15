@@ -19,7 +19,6 @@ public class ConfigScreenBase extends Screen {
     /* ===== Colors ===== */
     protected final Color backgroundColor = new Color(47, 48, 55, 240);
     protected final Color titleColor = new Color(233, 164, 155);
-    protected final Color textColor = new Color(255, 255, 255);
 
     /* ===== Positions ===== */
     protected int left, right, top, bottom;

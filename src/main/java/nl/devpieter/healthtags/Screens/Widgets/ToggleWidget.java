@@ -17,7 +17,6 @@ public class ToggleWidget extends ClickableWidget {
     private final MinecraftClient client = MinecraftClient.getInstance();
 
     private final Identifier texture = new Identifier("healthtags", "textures/gui/toggle_widget.png");
-//    private final int color = Color.WHITE.getRGB();
     private String enabledTranslationKey, disabledTranslationKey;
 
     private boolean toggled;

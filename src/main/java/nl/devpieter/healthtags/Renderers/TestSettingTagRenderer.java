@@ -6,11 +6,9 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import nl.devpieter.healthtags.Config.Setting.Setting;
-import nl.devpieter.healthtags.Config.Setting.ToggleSetting;
 import nl.devpieter.healthtags.Config.WidgetSetting.EnumWidgetSetting;
 import nl.devpieter.healthtags.Config.WidgetSetting.SliderWidgetSetting;
 import nl.devpieter.healthtags.Config.WidgetSetting.ToggleWidgetSetting;
-import nl.devpieter.healthtags.Enums.HealthTagRenderer;
 import nl.devpieter.healthtags.Enums.IWidgetableEnum;
 import org.jetbrains.annotations.NotNull;
 
