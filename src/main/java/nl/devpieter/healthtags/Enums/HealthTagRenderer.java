@@ -2,6 +2,7 @@ package nl.devpieter.healthtags.Enums;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.text.Text;
@@ -12,6 +13,7 @@ import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 
 import java.io.*;
+import java.util.Arrays;
 
 public enum HealthTagRenderer implements IWidgetableEnum {
 
@@ -37,6 +39,8 @@ public enum HealthTagRenderer implements IWidgetableEnum {
      */
     private @Nullable IHealthTagRenderer createNewRenderer(@Nullable Class<? extends IHealthTagRenderer> rendererClass) {
         if (rendererClass == null) return null;
+
+        // TODO - Don't create the config file if the renderer doesn't have any savable settings.
 
         File configFile = FileUtils.getRendererConfigFile(this);
         FileUtils.createFileIfNotExists(configFile);
@@ -70,7 +74,7 @@ public enum HealthTagRenderer implements IWidgetableEnum {
      * Saves the settings of the renderer to the config file.
      */
     public void saveSettings() {
-        if (this.renderer == null) return;
+        if (this.renderer == null || !this.hasSavableSettings()) return;
 
         File configFile = FileUtils.getRendererConfigFile(this);
         FileUtils.createFileIfNotExists(configFile);
@@ -115,11 +119,22 @@ public enum HealthTagRenderer implements IWidgetableEnum {
     }
 
     /***
+     * Checks if the renderer has savable settings.
+     * @return True if the renderer has savable settings, false otherwise.
+     */
+    public boolean hasSavableSettings() {
+        if (this.renderer == null) return false;
+        return Arrays.stream(this.renderer.getClass().getFields()).anyMatch(field -> field.isAnnotationPresent(Expose.class));
+    }
+
+    /***
      * Saves the settings of all renderers to their config files.
      */
     public static void saveAllSettings() {
         Logger logger = LogUtils.getLogger();
         logger.info("Saving all the settings of the renderers...");
-        for (HealthTagRenderer renderer : HealthTagRenderer.values()) renderer.saveSettings();
+        for (HealthTagRenderer renderer : HealthTagRenderer.values()) {
+            if (renderer.hasSavableSettings()) renderer.saveSettings();
+        }
     }
 }
