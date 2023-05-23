@@ -54,12 +54,4 @@ public class FileUtils {
             e.printStackTrace();
         }
     }
-
-    /***
-     * Checks if the given file exists.
-     * @param file The file to check.
-     */
-    public static boolean fileExists(@NotNull File file) {
-        return file.exists();
-    }
 }
