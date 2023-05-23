@@ -23,55 +23,59 @@ public enum HealthTagRenderer implements IWidgetableEnum {
 //    TEST("test", TestSettingTagRenderer.class);
 
     private final @NotNull String translationKey;
+    private final @Nullable Class<? extends IHealthTagRenderer> rendererClass;
     private final @Nullable IHealthTagRenderer renderer;
 
     HealthTagRenderer(@NotNull String translationKey, @Nullable Class<? extends IHealthTagRenderer> rendererClass) {
         this.translationKey = translationKey;
-        this.renderer = this.createNewRenderer(rendererClass);
+        this.rendererClass = rendererClass;
+        this.renderer = this.createNewRenderer();
         this.saveSettings();
     }
 
     /***
-     * Creates a new instance of the given renderer class and loads the settings from the config file.
-     * If the config file does not exist, a new instance is created and saved to the config file.
-     * @param rendererClass The class of the renderer to create.
-     * @return The new renderer instance.
+     * Creates a new instance of the renderer.
+     * @return A new instance of the renderer, or null if it failed to create.
      */
-    private @Nullable IHealthTagRenderer createNewRenderer(@Nullable Class<? extends IHealthTagRenderer> rendererClass) {
-        if (rendererClass == null) return null;
+    private @Nullable IHealthTagRenderer createNewRenderer() {
+        if (this.rendererClass == null) return null;
 
-        // TODO - Don't create the config file if the renderer doesn't have any savable settings.
-
-        File configFile = FileUtils.getRendererConfigFile(this);
-        FileUtils.createFileIfNotExists(configFile);
-
-        Logger logger = LogUtils.getLogger();
-
-        try (Reader reader = new FileReader(configFile)) {
-            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
-            IHealthTagRenderer newRenderer = gson.fromJson(reader, rendererClass);
-
-            if (newRenderer == null) logger.warn("Failed to load the config for '{}', trying to create a new instance.", this.name());
-            else logger.info("Loaded the config for '{}'", this.name());
-
-            return newRenderer == null ? rendererClass.getConstructor().newInstance() : newRenderer;
-        } catch (Exception e) {
-            logger.error("Failed to load the config for '{}', trying to create a new instance.", this.name());
-            e.printStackTrace();
+        if (this.hasSavableSettings()) {
+            IHealthTagRenderer renderer = this.createNewRendererFromConfig();
+            if (renderer != null) return renderer;
         }
 
         try {
-            logger.info("Trying to create a new instance of '{}'", this.name());
-            return rendererClass.getConstructor().newInstance();
+            return this.rendererClass.getConstructor().newInstance();
         } catch (Exception e) {
-            logger.error("Failed to create a new instance of '{}'", this.name());
             e.printStackTrace();
             return null;
         }
     }
 
     /***
-     * Saves the settings of the renderer to the config file.
+     * Creates a new instance of the renderer from its config file.
+     * @return A new instance of the renderer. If the config file doesn't exist, null will be returned.
+     */
+    private @Nullable IHealthTagRenderer createNewRendererFromConfig() {
+        if (this.rendererClass == null) return null;
+
+        File configFile = FileUtils.getRendererConfigFile(this);
+        if (!configFile.exists()) return null;
+
+        try (Reader reader = new FileReader(configFile)) {
+            Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
+            IHealthTagRenderer newRenderer = gson.fromJson(reader, this.rendererClass);
+
+            return newRenderer == null ? this.rendererClass.getConstructor().newInstance() : newRenderer;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /***
+     * Saves the settings of the renderer to its config file.
      */
     public void saveSettings() {
         if (this.renderer == null || !this.hasSavableSettings()) return;
@@ -123,8 +127,8 @@ public enum HealthTagRenderer implements IWidgetableEnum {
      * @return True if the renderer has savable settings, false otherwise.
      */
     public boolean hasSavableSettings() {
-        if (this.renderer == null) return false;
-        return Arrays.stream(this.renderer.getClass().getFields()).anyMatch(field -> field.isAnnotationPresent(Expose.class));
+        if (this.rendererClass == null) return false;
+        return Arrays.stream(this.rendererClass.getFields()).anyMatch(field -> field.isAnnotationPresent(Expose.class));
     }
 
     /***
